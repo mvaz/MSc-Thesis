@@ -1,9 +1,10 @@
-\documentclass[12pt]{ociamthesis}  % default square logo 
-%\documentclass[12pt,beltcrest]{ociamthesis} % use old belt crest logo
-%\documentclass[12pt,shieldcrest]{ociamthesis} % use older shield crest logo
+% \documentclass[12pt]{ociamthesis}  % default square logo 
+\documentclass[12pt,beltcrest]{ociamthesis} % use old belt crest logo
+% \documentclass[12pt,shieldcrest]{ociamthesis} % use older shield crest logo
 
 %load any additional packages
 \usepackage{amssymb}
+\usepackage[round]{natbib}
 
 %input macros (i.e. write your own macros file called mymacros.tex 
 %and uncomment the next line)
@@ -47,7 +48,17 @@ of credit concentration risk}
 \section{Concentration Risk} % (fold)
 \label{sec:concentration_risk}
 
-This is the introduction.
+
+
+Banking regulators (Basel II) require market participants to identify and monitor concentration risk in their credit portfolios. Concentration risk is the risk arising from high exposure to single risk factors. Standard concentration measures rely mainly on the aggregation of the measures of each portfolio element and for example sectorial allocation~\citep{lutkebohmert2008concentration}. They underestimate, however, direct economic links between the elements of the portfolio and therefore the underlying structure of the portfolio. The importance of structural measures has been confirmed by recent financial events, where large losses arising from worldwide contagion effects where registered~\citep{Kazi:2013vr}.
+	
+Network models are especially apt at identifying structural properties~\citep{newman2010networks}, as they take not only model the elements of a system (the nodes) but also the relations between those elements (the edges). Network models are proving to be useful tools for providing early-warning signals of systemic risk~\citep{Squartini:2013ev}, measuring liquidity risk~\citep{Karas:2012tp}, identifying sectors from time-series correlations~\citep{Onnela:2004vz,Fenn:2009uf,Fenn:2011kp}, as well as insights into finding diversified baskets of assets in the classical investment framework~\citep{Pozzi:2013ci}.
+
+Previous work on concentration risk with network model~\citep{Sindel:2009vd} used a ramping parameter for eliminating correlations (connections) that have a smaller strength than the ramping parameter, and measured the community structure of the resulting network. The evolution of the number of isolated components with the ramping parameter provides an insight into how strongly interdependent the portfolio is. One of the drawbacks of the method is that computational complexity of the method ($O(N)$).
+
+The main goal of this thesis is to address the computational complexity of the method by providing a link to other common structural graph measures, e.g. eigenvector centrality, and financial specific measures, such as Debt-Rank~\citep{Puliga:2012ev} which models contagion effects from interdependencies of financial institutions.
+In order to do so, we will first study the properties of different theoretical network formation models (e.g. Watts–Strogatz model~\citep{Watts:1998db}.
+In a second stage, real credit portfolios will be used. Should time permit, the effect of different types of interdependencies will be studied by means of multilayer networks~\citep{Kivela:2014dm}.
 % section concentration_risk (end)
 
 \include{chapter1}
@@ -63,8 +74,9 @@ This is the introduction.
 \addcontentsline{toc}{chapter}{Bibliography}
 %uncomment next line to change bibliography name to references
 %\renewcommand{\bibname}{References}
-\bibliography{refs}        %use a bibtex bibliography file refs.bib
-\bibliographystyle{plain}  %use the plain bibliography style
+\bibliographystyle{plainnat}  %use the plain bibliography style
+\bibliography{bibliography/biblio}        %use a bibtex bibliography file refs.bib
+
 
 \end{document}
 
