@@ -1,5 +1,6 @@
 *.aux
 *.log
+*.lof
 *.toc
 *.fdb_framework
 *.fls
