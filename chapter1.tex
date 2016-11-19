@@ -1,0 +1,74 @@
+\chapter{Definitions}
+
+In general, the complex networks - networks of both randomness and structure - studied in this article can be represented by an undirected and unweighed graph:
+\begin{equation}
+G = (V,E)	
+\end{equation}
+, where $V$ is the set of vertices (or nodes), and $E$ is the set of edges (or links).
+
+Each edge connects exactly one pair of vertices, and a vertex-pair can be connected by maximally one edge, i.e., multi-connection is not allowed.
+Let furthermore $N$ denote the number of vertices $N = |V|$ and $L$ the number of edges $L = |E|$.
+
+For a social network [9], $V$ is a set of persons (or "actors" in sociology parlance) and $E$ is the set of acquaintance ties that links the persons together.
+In computer networks $V$ represent the routers or computers and $E$ the channels for computer communication.
+
+
+
+
+
+
+\section{Generating functions}
+
+We assume throughout this chapter that  follow~\cite{Newman:zFi032Kd}, which defines a set of generating functions for the probability distributions of some of the statistical properties of the graphs.
+The basis of these is the function $G_0(x)$ for the probability distribution of vertex degrees $k$, defined as
+\begin{equation}
+G_0(x) = \sum_{k=0}^{\infty} p_k x^k
+\end{equation}
+where $p_k$ is the probability that a given vertex of the graph has degree $k$.
+
+- normalization assumption ($G_0(1) = 1$)
+- $G_0(x)$ is finite for all $|x| \le 1$
+
+The derivatives of this function can be used to derive other statistical quantities.
+For example, one can recover the probability $p_k$ by taking the $k^{th}$ derivative of the $G_0$
+\begin{equation}
+	p_k = \frac{1}{k!} \frac{d^k G_0}{dx^k} \Big|_{x=0}.
+\end{equation}
+
+Furthermore, one can obtain the average degree $z$ of the nodes in a graph 
+\begin{equation}
+	z = \mean{k} = \sum_k k p_k = G'_0(1)
+\end{equation}
+
+The function is given by the polylogarithm function
+\begin{equation}
+	\poly{n}{z} = \sum_{k=1}^{\infty} \frac{z^k}{k^n}
+\end{equation}
+
+\subsubsection{Component sizes} % (fold)
+\label{ssub:component_sizes}
+
+$H_1(x)$ follows the recursive condition
+\begin{equation}
+	H_1(x) = x G_1( H_1(x))
+\end{equation}
+
+
+\begin{equation}
+\mean{s} = 1 + \frac{G'_0(1)}{1-G'_1(1)}	
+\end{equation}
+
+
+For a power law graph, this is given by
+\begin{equation}
+	G_1(x) = \frac{\poly{\tau-1}{xe^{-1/\kappa}}}{x\poly{\tau-1}{e^{-1/\kappa}}}
+\end{equation}
+and therefore
+\begin{equation}
+	G'_1(x) = \frac{\operatorname{Li}_{s - 2} \left(x e^{- 1/\kappa}\right)}
+	               {x^{2} \operatorname{Li}_{s - 1}\left(e^{- 1/\kappa}\right)} -
+	          \frac{\operatorname{Li}_{s - 1}\left(x e^{- 1/\kappa}\right)}
+	               {x^{2} \operatorname{Li}_{s - 1}\left(e^{- 1/\kappa}\right)}
+\end{equation}
+
+% subsubsection component_sizes (end)Component sizes

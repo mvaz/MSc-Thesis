@@ -2,9 +2,44 @@
 
 The ASRF Model is widely used and serves as a base for the Basel Commitee's regulatory requirements.
 Underlying this model are the assumptions that a credit portfolio consists of a large number of exposures, and that each of these exposures contains a systematic risk, which is common to each exposure, and an idiosyncratic risk.
-As the portfolio grows, in the ASRF model, the exposure to the idiosyncratic risk diminues, since the risks of the individual exposures diminish in relative size and end up cancelling out.
+As the portfolio grows, in the ASRF model, the exposure to the idiosyncratic risk decreases, since the risks of the individual exposures diminish in relative size and end up cancelling out.
 When the idiosyncratic risk is diversified away, only the systematic risk remains.
 Portfolios are, therefore, infinitely fine-grained.
 
 Real portfolios, however, are not infinite, so that the idiosyncratic risk is still present and must be taken into account by banks.
 Under Pillar 2 (Basel II), the non-diversified idiosyncratic risk is to be into account by a granularity adjustment.
+
+
+We define the ASRF model as follows
+
+Let
+$p_i = \P(D_i)$ the unconditional probability of default (PD) assigned to firm $i$.
+The asset values of each firm $i$ are modelled using a geometric Brownian motion $W_i(t)$.
+The obligor $i$ defaults if the asset value falls below a given barrier $C_i$ (debts)
+\begin{equation}
+	D_i = \mathbbm{1}{A_i < C_i}
+\end{equation}
+so that
+\begin{equation}
+	D_i = \left\{  W_i < \Phi^{-1}(p_i) \right\}
+\end{equation}
+and 
+\begin{equation}
+	p_D_i = P(D_i = 1) = P(A_i < C_i) = \Phi(c_i)
+\end{equation}
+
+
+
+The portfolio percentage loss is given by
+\begin{equation}
+	L_n = \sum_{i=1}^{n} w_i \upeta_i \mathbbm{1}_{D_i}
+\end{equation}
+
+The model assumes that the latent random variables $W_1,\ldots,W_n$ are standard Gaussian and conditionally independent variables, and that 
+\begin{equation}
+	W_i = \sqrt{\rho_i} Y + \sqrt{1-\rho_i} Z_i
+\end{equation}
+where random variables $Z_1, Z_n$ and Y are standard Gaussian and mutually independent, and $\rho_1, \ldots, \rho_n \in (0,1)$ are correlation parameters.
+Thus, $W_1, \ldots, \W_n$ all depend on $Y$, the systematic risk factor that represents the state of the economy.
+The random variables $Z_{1,\ldots,n}$ represent the idiosyncratic risk, specific to each obligor.
+
