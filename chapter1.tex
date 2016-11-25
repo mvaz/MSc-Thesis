@@ -1,4 +1,4 @@
-\chapter{Definitions}
+\chapter{Graphs and networks}
 
 In general, the complex networks - networks of both randomness and structure - studied in this article can be represented by an undirected and unweighed graph:
 \begin{equation}
@@ -12,15 +12,57 @@ Let furthermore $N$ denote the number of vertices $N = |V|$ and $L$ the number o
 For a social network [9], $V$ is a set of persons (or "actors" in sociology parlance) and $E$ is the set of acquaintance ties that links the persons together.
 In computer networks $V$ represent the routers or computers and $E$ the channels for computer communication.
 
+\section{Random graph model} % (fold)
+\label{sec:random_graph_model}
 
 
-\section{Configuration model}
+
+One of the models of network formation is the original random-graph model.
+This model was studied extensively by the Hungarian mathematicians Paul Erd\"os (1913–1996) and Alfr\'ed R\'enyi (1921–1970), and was responsible for a large corpus of research on random graphs
+In the random graph model, a graph has $n$ vertices or nodes, and for every pair of nodes $i, j$, an edge exists with probability $p$.
+It is usually denoted by $G(n, p)$, and defines a distribution of graphs $P(G)$.
+As with other models studied in this thesis, statements made about the model are statements made about the collection of graphs, rather than any specific instance of a graph.
+
+
+\subsection{Mean degree and degree distribution} % (fold)
+\label{ssub:mean_degree_and_degree_distribution}
+
+
+In the random graph model, the existence of any edge is independent from each other and solely determined by the same probability value $p$.
+As such, the probability of a graph with $m$ edges drawn from the $G(n,p)$ model is given by a binomial distribution choosing $m$ edges out of a universe of $\binom{n}{2}$ edges
+\begin{equation}
+	P(m) = \binom{\binom{n}{2}}{m} p^m (1-p)^{\binom{n}{2}-m}
+\end{equation}
+Using the binomial theorem, 
+\begin{equation}
+	\mean{m} = \sum^{\binom{n}{2}}_{m=0} P(m) = \binom{n}{2} p
+\end{equation}
+
+In the course of this document, we will be not only interested on the properties of the graph itself, but also on how they build from the individual properties of the edges and nodes.
+Under the $G(n,m)$, the mean degree of a vertex is
+\begin{equation}
+	\mean{k} = \sum^{\binom{n}{2}}_{m=0} \frac{2m}{n} P(m)
+\end{equation}
+
+
+% subsubsection mean_degree_and_degree_distribution (end)Mean degree and degree distribution
+
+
+
+% section random_graph_model (end)
+
+\section{Configuration model} % (fold)
+\label{sec:configuration_model}
 
 The configuration model is one of the most popular null models for the study of the statistical properties of networks.
-Other models include the 
+It is inspired 
+
+% section configuration_model (end){Configuration model}
+
+\section{Generating functions} % (fold)
+\label{sec:generating_functions}
 
 
-\section{Generating functions}
 
 We assume throughout this chapter that  follow~\cite{Newman:zFi032Kd}, which defines a set of generating functions for the probability distributions of some of the statistical properties of the graphs.
 The basis of these is the function $G_0(x)$ for the probability distribution of vertex degrees $k$, defined as
@@ -75,3 +117,4 @@ and therefore
 \end{equation}
 
 % subsubsection component_sizes (end)Component sizes
+% section generating_functions (end)
