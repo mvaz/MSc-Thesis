@@ -87,12 +87,13 @@ Since every edge in the graph exists independently, then we have
 \end{equation}
 If we take the logarithm of both sides, 
 \begin{equation}
-	\ln u = ln\left( \left[ 1 - \frac{c}{n-1} (1-u)\right]^{n-1} \right) = (n-1) ln\left( 1-\frac{c}{n-1} (1-u)\right)
+	\ln u = \ln\left[ 1 - \frac{c}{n-1} (1-u)\right]^{n-1} = (n-1) \ln\left( 1-\frac{c}{n-1} (1-u)\right)
 \end{equation}
-When $n$ is large, we can approximate
+When $n$ is large, $\frac{c}{n-1}$ is very small, so that we can approximate
 \begin{equation}
-	
+	\ln\left( 1-\frac{c}{n-1} (1-u)\right) \approx - \frac{c}{n-1} (1-u)
 \end{equation}
+
 
 
 % subsection giant_component (end)
