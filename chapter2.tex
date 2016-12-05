@@ -23,6 +23,13 @@ In the random graph model, a graph has $n$ vertices or nodes, and for every pair
 It is usually denoted by $G(n, p)$, and defines a distribution of graphs $P(G)$.
 As with other models studied in this thesis, statements made about the model are statements made about the collection of graphs, rather than any specific instance of a graph.
 
+\begin{figure}[tb]
+	\centering
+	\includegraphics[width=10cm]{figures/gnp_hairball.png}
+	\caption{Caption here}
+	\label{fig:figure1}
+\end{figure}
+
 The random graph model is especially interesting because several of its statistical properties can be derived analytically.
 The properties of the networks it generates, however, differ substantially from those observed in real world networks~\cite{Albert:2002p4071}.
 
@@ -89,12 +96,39 @@ If we take the logarithm of both sides,
 \begin{equation}
 	\ln u = \ln\left[ 1 - \frac{c}{n-1} (1-u)\right]^{n-1} = (n-1) \ln\left( 1-\frac{c}{n-1} (1-u)\right)
 \end{equation}
-When $n$ is large, $\frac{c}{n-1}$ is very small, so that we can approximate
+When $n$ is large, $\frac{c}{n-1}$ is very small, so that we following approximation holds
 \begin{equation}
 	\ln\left( 1-\frac{c}{n-1} (1-u)\right) \approx - \frac{c}{n-1} (1-u)
 \end{equation}
 
+and therefore,
+\begin{equation}
+	\ln u \approx - c (1-u)
+\end{equation}
+By taking the exponential of both sides, we can write it as
+\begin{equation}
+	u \approx e^{-c(1-u)}
+\end{equation}
+Alternatively, one can consider the reciprocal of $u$, i.e. the fraction $S$ of nodes that do belong to the giant component.
+\begin{equation}
+	S = 1 - e^{-cS}
+\end{equation}
+\begin{equation}
+	c = - \frac{\ln(1-S)}{S}
+\end{equation}
+\noindent which is expressed through the Lambert $W$-function
+\begin{equation}
+S = 1 + \frac{W(-c e^{-c})}{c}
+\label{eq:s_giant_component_lambert}
+\end{equation}
 
+
+\begin{figure}[tb]
+	\centering
+	\includegraphics[]{figures/s_as_function_of_p.png}
+	\caption{Caption here}
+	\label{fig:figure1}
+\end{figure}
 
 % subsection giant_component (end)
 
@@ -107,6 +141,15 @@ When $n$ is large, $\frac{c}{n-1}$ is very small, so that we can approximate
 
 \subsection{Component sizes} % (fold)
 \label{sub:component_sizes}
+
+
+Generating functions.
+
+The average size of $\mean{s}$ becomes 
+\begin{equation}
+	\mean{s} = \frac{1}{1-c-cS}
+\end{equation}
+with $S$ being the fractional size of the giant component, as given by equation~\ref{eq:s_giant_component_lambert}.
 
 % subsection component_sizes (end)
 
@@ -159,6 +202,12 @@ $H_1(x)$ follows the recursive condition
 \begin{equation}
 	H_1(x) = x G_1( H_1(x))
 \end{equation}
+
+
+
+
+
+
 
 
 \begin{equation}
