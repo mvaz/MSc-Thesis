@@ -59,15 +59,54 @@ of credit concentration risk}
 
 
 
-Banking regulators (Basel II) require market participants to identify and monitor concentration risk in their credit portfolios. Concentration risk is the risk arising from high exposure to single risk factors. Standard concentration measures rely mainly on the aggregation of the measures of each portfolio element and for example sectorial allocation~\citep{lutkebohmert2008concentration}. They underestimate, however, direct economic links between the elements of the portfolio and therefore the underlying structure of the portfolio. The importance of structural measures has been confirmed by recent financial events, where large losses arising from worldwide contagion effects were registered~\citep{Kazi:2013vr}.
+Banking regulators (Basel II) require market participants to identify and monitor concentration risk in their credit portfolios. Concentration risk is the risk arising from high exposure to single risk factors. Standard concentration measures rely mainly on the aggregation of the measures of each portfolio element and, for example sectorial allocation~\citep{lutkebohmert2008concentration}.
+They underestimate, however, direct economic links between the elements of the portfolio and therefore the underlying structure of the portfolio.
+The importance of structural measures has been confirmed by recent financial events, where large losses arising from worldwide contagion effects were registered~\citep{Kazi:2013vr}.
 	
 Network models are especially apt at identifying structural properties~\citep{newman2010networks}, as they take not only model the elements of a system (the nodes) but also the relations between those elements (the edges). Network models are proving to be useful tools for providing early-warning signals of systemic risk~\citep{Squartini:2013ev}, measuring liquidity risk~\citep{Karas:2012tp}, identifying sectors from time-series correlations~\citep{Onnela:2004vz,Fenn:2009uf,Fenn:2011kp}, as well as insights into finding diversified baskets of assets in the classical investment framework~\citep{Pozzi:2013ci}.
 
-Previous work on concentration risk with network model~\citep{Sindel:2009vd} used a ramping parameter for eliminating correlations (connections) that have a smaller strength than the ramping parameter, and measured the community structure of the resulting network. The evolution of the number of isolated components with the ramping parameter provides an insight into how strongly interdependent the portfolio is. One of the drawbacks of the method is that computational complexity of the method ($O(N)$).
+Previous work on concentration risk with network model~\citep{Sindel:2009vd} used a ramping parameter for eliminating correlations (connections) that have a smaller strength than the ramping parameter, and measured the community structure of the resulting network. The evolution of the number of isolated components with the ramping parameter provides an insight into how strongly interdependent the portfolio is.
+
+While this method is apt at measuring the individual properties off to a specific portfolio, the expected properties of the model for a given portfolios aren't known yet.
+The main goal of this thesis this is to study the properties of the ramping parameter under the most common theoretical graph models: the random graph model and the configuration model.
 
 The main goal of this thesis is to address the computational complexity of the method by providing a link to other common structural graph measures, e.g. eigenvector centrality, and financial specific measures, such as Debt-Rank~\citep{Puliga:2012ev} which models contagion effects from interdependencies of financial institutions.
 In order to do so, we will first study the properties of different theoretical network formation models (e.g. Watts–Strogatz model~\citep{Watts:1998db}.
 In a second stage, real credit portfolios will be used. Should time permit, the effect of different types of interdependencies will be studied by means of multilayer networks~\citep{Kivela:2014dm}.
+
+
+\section{Random graph models} % (fold)
+\label{sec:random_graph_models}
+
+Random graph models are widely used to understand the properties of real world networks~\cite{newman2002random}.
+They provide a means of generating and analysing networks with statistical properties that resemble those of real-world networks.
+The most popular random graph model is credited to Paul Erd\"os and Alfr\'ed R\'enyi~\cite{}
+The biggest reason to its popularity is the fact that it is analytically tractable although its properties are not necessarily resemble those observed in social, financial or technical ecosystems.
+
+
+Many of these real-world networks turn out to share similar properties, such as the fact that they are small worlds, and are scale-free, which means that they have degrees obeying power laws.
+The Erd\"os-R\'enyi random graph does not obey these properties.
+
+
+
+A second way in which random graphs differ from their real-world counterparts is in their degree distributions, a point which has been emphasized particularly in the work of Albert, Baraba ́si, and collaborators (Albert et al., 1999; Baraba ́si and Albert, 1999). The probability pk that a vertex in an Erd ̋os–R ́enyi random graph has degree exactly k is given by the binomial distribution:
+
+
+% section random_graph_models (end)
+
+\section{Ramping parameter} % (fold)
+\label{sec:ramping_parameter}
+
+
+
+
+% section ramping_parameter (end)
+
+\section{Organisation of this document} % (fold)
+\label{sec:organisation_of_this_document}
+
+% section organisation_of_this_document (end)
+
 % section concentration_risk (end)
 
 \include{chapter2}
