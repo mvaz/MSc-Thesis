@@ -6,19 +6,21 @@
 \usepackage{amssymb}
 \usepackage{amsmath}
 \usepackage{bbm}
-\usepackage[round]{natbib}
+% \usepackage[round]{natbib}
 \usepackage{varioref}
 \usepackage{algorithm}
 \usepackage{algpseudocode}
 
 \usepackage{amsthm}
+% \usepackage{natbib}
+\usepackage{apalike}
 
 
 %input macros (i.e. write your own macros file called mymacros.tex 
 %and uncomment the next line)
 \include{macros}
 
-\title{Network modelling \\[1ex]
+\title{Network modelling \\ Real world[1ex]
 of credit concentration risk}
 %note \\[1ex] is a line break in the title
 
@@ -54,25 +56,27 @@ of credit concentration risk}
 
 %now include the files of latex for each of the chapters etc
 \chapter{Introduction}
-\section{Concentration Risk} % (fold)
-\label{sec:concentration_risk}
 
 
 
-Banking regulators (Basel II) require market participants to identify and monitor concentration risk in their credit portfolios. Concentration risk is the risk arising from high exposure to single risk factors. Standard concentration measures rely mainly on the aggregation of the measures of each portfolio element and, for example sectorial allocation~\citep{lutkebohmert2008concentration}.
+Banking regulators (Basel II) require market participants to identify and monitor concentration risk in their credit portfolios. Concentration risk is the risk arising from high exposure to single risk factors. Standard concentration measures rely mainly on the aggregation of the measures of each portfolio element and, for example sectorial allocation~\cite{lutkebohmert2008concentration}.
 They underestimate, however, direct economic links between the elements of the portfolio and therefore the underlying structure of the portfolio.
-The importance of structural measures has been confirmed by recent financial events, where large losses arising from worldwide contagion effects were registered~\citep{Kazi:2013vr}.
+The importance of structural measures has been confirmed by recent financial events, where large losses arising from worldwide contagion effects were registered~\cite{Kazi:2013vr}.
 	
-Network models are especially apt at identifying structural properties~\citep{newman2010networks}, as they take not only model the elements of a system (the nodes) but also the relations between those elements (the edges). Network models are proving to be useful tools for providing early-warning signals of systemic risk~\citep{Squartini:2013ev}, measuring liquidity risk~\citep{Karas:2012tp}, identifying sectors from time-series correlations~\citep{Onnela:2004vz,Fenn:2009uf,Fenn:2011kp}, as well as insights into finding diversified baskets of assets in the classical investment framework~\citep{Pozzi:2013ci}.
+Network models are especially apt at identifying structural properties~\cite{newman2010networks}, as they take not only model the elements of a system (the nodes or vertices) but also the relations between those elements (the edges). Network models are proving to be useful tools for providing early-warning signals of systemic risk~\cite{Squartini:2013ev}, measuring liquidity risk~\cite{Karas:2012tp}, identifying sectors from time-series correlations~\cite{Onnela:2004vz,Fenn:2009uf,Fenn:2011kp}, as well as insights into finding diversified baskets of assets in the classical investment framework~\cite{Pozzi:2013ci}.
 
-Previous work on concentration risk with network model~\citep{Sindel:2009vd} used a ramping parameter for eliminating correlations (connections) that have a smaller strength than the ramping parameter, and measured the community structure of the resulting network. The evolution of the number of isolated components with the ramping parameter provides an insight into how strongly interdependent the portfolio is.
+Previous work on concentration risk with network model~\cite{Sindel:2009vd} used a ramping parameter for eliminating correlations (connections) that have a smaller strength than the ramping parameter, and measured the community structure of the resulting network. The evolution of the number of isolated components with the ramping parameter provides an insight into how strongly interdependent the portfolio is.
 
-While this method is apt at measuring the individual properties off to a specific portfolio, the expected properties of the model for a given portfolios aren't known yet.
+While this method is able to measure the properties of specific portfolios, the expected properties of the model for a given portfolios aren't known yet.
 The main goal of this thesis this is to study the properties of the ramping parameter under the most common theoretical graph models: the random graph model and the configuration model.
+Studying the properties of the ramping parameter under these models has proved for other types of questions (consider for example of epidemiology models~\cite{keeling2005networkspublisher}) useful for several reasons.
+Firstly, having the model inspected theoretically allows for a better understanding of its properties.
+Secondly, even though the theoretical models do not capture all the properties of real world graphs, it provides useful baselines for comparison with the results with real portfolios.
 
-The main goal of this thesis is to address the computational complexity of the method by providing a link to other common structural graph measures, e.g. eigenvector centrality, and financial specific measures, such as Debt-Rank~\citep{Puliga:2012ev} which models contagion effects from interdependencies of financial institutions.
-In order to do so, we will first study the properties of different theoretical network formation models (e.g. Watts–Strogatz model~\citep{Watts:1998db}.
-In a second stage, real credit portfolios will be used. Should time permit, the effect of different types of interdependencies will be studied by means of multilayer networks~\citep{Kivela:2014dm}.
+
+% The main goal of this thesis is to address the computational complexity of the method by providing a link to other common structural graph measures, e.g. eigenvector centrality, and financial specific measures, such as Debt-Rank~\citep{Puliga:2012ev} which models contagion effects from interdependencies of financial institutions.
+% In order to do so, we will first study the properties of different theoretical network formation models (e.g. Watts–Strogatz model~\citep{Watts:1998db}.
+% In a second stage, real credit portfolios will be used. Should time permit, the effect of different types of interdependencies will be studied by means of multilayer networks~\citep{Kivela:2014dm}.
 
 
 \section{Random graph models} % (fold)
@@ -80,30 +84,49 @@ In a second stage, real credit portfolios will be used. Should time permit, the 
 
 Random graph models are widely used to understand the properties of real world networks~\cite{newman2002random}.
 They provide a means of generating and analysing networks with statistical properties that resemble those of real-world networks.
-The most popular random graph model is credited to Paul Erd\"os and Alfr\'ed R\'enyi~\cite{}
-The biggest reason to its popularity is the fact that it is analytically tractable although its properties are not necessarily resemble those observed in social, financial or technical ecosystems.
+The most popular random graph model is credited to %Paul Erd\"os and Alfr\'ed R\'enyi
+~\cite{erdos1959random}.
+One reason for its popularity is the fact that it is very simple (and analytically tractable).
+Although its properties do not necessarily resemble those observed in social, financial or technical ecosystems, its dynamics already capture a very interesting phenomenon that is also relevant for this thesis: the emergence of a so-called giant component.
+
+A connected component is a set of nodes between which there is always a path.
+The giant component is a connected component for which the fraction of nodes it contains remains constant as the network grows in size.
+It is also the largest component in the graph, and can be usually seen in many real world networks~\footnote{For example, in the case of the internet network, the existence of a giant component is extremely important, as it guarantees that nodes can communicate with each other}.
+Not only its existence is of interest, but the emergence of the giant component is an important phenomenon.
+It emerges almost spontaneously as the edge density reaches a critical value, leading to a phase transition, as explained by~\cite{newman2002random}.
+
+One important property where the random graph model does not mimic the Real world network properties is it Is with the distribution of degree.
+Of the degree is the property of the node in a graph, and it describes how many connections the node has to be other notes in the graph.
+Real-world networks tend to have heavy tailed distributions, where as the random graph model has a binomial distribution / Poisson distribution.
+One of the these heavy tail distributions is the power law distribution, which is scale-free, as was and was shown by~\cite{Albert:2002p4071} to to lead to small world phenomenon~\cite{Watts:1998db}.
+
+% Many of these real-world networks turn out to share similar properties, such as the fact that they are small worlds, and are scale-free, which means that they have degrees obeying power laws.
+% The Erd\"os-R\'enyi random graph does not obey these properties.
 
 
-Many of these real-world networks turn out to share similar properties, such as the fact that they are small worlds, and are scale-free, which means that they have degrees obeying power laws.
-The Erd\"os-R\'enyi random graph does not obey these properties.
 
-
-
-A second way in which random graphs differ from their real-world counterparts is in their degree distributions, a point which has been emphasized particularly in the work of Albert, Baraba ́si, and collaborators (Albert et al., 1999; Baraba ́si and Albert, 1999). The probability pk that a vertex in an Erd ̋os–R ́enyi random graph has degree exactly k is given by the binomial distribution:
+% A second way in which random graphs differ from their real-world counterparts is in their degree distributions, a point which has been emphasized particularly in the work of Albert, Baraba ́si, and collaborators (Albert et al., 1999; Baraba ́si and Albert, 1999). The probability pk that a vertex in an Erd ̋os–R ́enyi random graph has degree exactly k is given by the binomial distribution:
 
 
 % section random_graph_models (end)
 
-\section{Ramping parameter} % (fold)
+\section{The ramping parameter and credit concentration risk} % (fold)
 \label{sec:ramping_parameter}
 
+The ramping parameter model was developed in~\cite{Sindel:2009vd} and aims at assessing the concentration risk in real world loan portfolios. 
+In contrast to other methods for studying concentration risk, the ramping parameter takes into account both, the exposure- and the dependency-structure of the portfolio.
+A particular strength of this methodology is that it can be used universally.
 
+The ramping parameter monitors how the components of a graph (which represents the considered portfolio) decay as edges are removed increasingly according to their strength.
+It computes a curve that parameterizes the dependence of the effective exposure on the ramping parameter.
 
 
 % section ramping_parameter (end)
 
 \section{Organisation of this document} % (fold)
 \label{sec:organisation_of_this_document}
+
+
 
 % section organisation_of_this_document (end)
 
@@ -122,9 +145,9 @@ A second way in which random graphs differ from their real-world counterparts is
 %next line adds the Bibliography to the contents page
 \addcontentsline{toc}{chapter}{Bibliography}
 %uncomment next line to change bibliography name to references
-%\renewcommand{\bibname}{References}
-\bibliographystyle{plainnat}  %use the plain bibliography style
-\bibliography{bibliography/biblio}        %use a bibtex bibliography file refs.bib
+\renewcommand{\bibname}{References}
+\bibliographystyle{apalike}  %use the plain bibliography style
+\bibliography{bibliography/biblio}        % use a bibtex bibliography file refs.bib
 
 
 \end{document}
