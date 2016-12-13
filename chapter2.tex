@@ -119,12 +119,13 @@ Alternatively, one can consider the reciprocal of $u$, i.e. the fraction $S$ of 
 \begin{equation}
 	c = - \frac{\ln(1-S)}{S}
 \end{equation}
-\noindent which is expressed through the Lambert $W$-function
+\noindent Although very simple, the equation has no closed-form solution~\cite{newman2010networks}.
+It can be expressed through the \Lambert $W$-function~\footnote{The Lambert-W function is a set of functions representing the inverse relation of the function $f(z) = z e^{z}$ where $z$ is a complex number, i.e. {\displaystyle\, z=f^{-1}(ze^{z})=W(ze^{z})}}
 \begin{equation}
 S = 1 + \frac{W(-c e^{-c})}{c}
 \label{eq:s_giant_component_lambert}
 \end{equation}
-
+\noindent, for which there are standardized numerical software modules.
 
 \begin{figure}[tb]
 	\centering

@@ -14,6 +14,8 @@
 \usepackage{amsthm}
 % \usepackage{natbib}
 \usepackage{apalike}
+\usepackage{todonotes}
+
 
 
 %input macros (i.e. write your own macros file called mymacros.tex 
@@ -79,6 +81,30 @@ Secondly, even though the theoretical models do not capture all the properties o
 % In a second stage, real credit portfolios will be used. Should time permit, the effect of different types of interdependencies will be studied by means of multilayer networks~\citep{Kivela:2014dm}.
 
 
+
+\section{Credit concentration risk} % (fold)
+\label{sec:credit_concentration_risk}
+
+\todo{add info from other thesis}
+
+% section credit_concentration_risk (end)
+
+\section{The ramping parameter model} % (fold)
+\label{sec:ramping_parameter}
+
+The ramping parameter model was developed in~\cite{Sindel:2009vd} and aims at assessing the concentration risk in real world loan portfolios. 
+In contrast to other methods for studying concentration risk, the ramping parameter takes into account both, the exposure- and the dependency-structure of the portfolio.
+A particular strength of this methodology is that it can be used universally.
+
+The ramping parameter monitors how the component structure of a graph (which represents the considered portfolio) develops as edges are removed increasingly according to their strength.
+% It computes a curve that parameterizes the dependency of the effective exposure on the ramping parameter.
+
+
+\todo{add example}
+
+% section ramping_parameter (end)
+
+
 \section{Random graph models} % (fold)
 \label{sec:random_graph_models}
 
@@ -91,37 +117,27 @@ Although its properties do not necessarily resemble those observed in social, fi
 
 A connected component is a set of nodes between which there is always a path.
 The giant component is a connected component for which the fraction of nodes it contains remains constant as the network grows in size.
-It is also the largest component in the graph, and can be usually seen in many real world networks~\footnote{For example, in the case of the internet network, the existence of a giant component is extremely important, as it guarantees that nodes can communicate with each other}.
+It is also the largest component in the graph, and can be usually seen in many real world networks~\footnote{For example, in the case of the internet network, the existence of a giant component is extremely important, as it guarantees that as much nodes (computers) as possible can communicate with each other}.
 Not only its existence is of interest, but the emergence of the giant component is an important phenomenon.
 It emerges almost spontaneously as the edge density reaches a critical value, leading to a phase transition, as explained by~\cite{newman2002random}.
+This can also be seen in Figure~\vref{fig:giant_component}
+\begin{figure}[tb]
+	\centering
+	\includegraphics[width=13cm]{figures/giant_component.png}
+	\caption{This figure illustrates the sudden appearance of a giant connected component (lower plots) in the random graph model. The graphs, each with $n=200$ nodes are generated randomly, with a mean degree of $c$ and an edge probability $p$. The random graph model predicts a giant component when $c\ge1$}
+	\label{fig:giant_component}
+\end{figure}
 
-One important property where the random graph model does not mimic the Real world network properties is it Is with the distribution of degree.
-Of the degree is the property of the node in a graph, and it describes how many connections the node has to be other notes in the graph.
+One important property where the random graph model does not mimic the real world networks is the distribution of a node's degree.
+The degree is a property of the node in a graph that describes how many connections (or how important these connections are) the node has to the other nodes in the graph.
 Real-world networks tend to have heavy tailed distributions, where as the random graph model has a binomial distribution / Poisson distribution.
-One of the these heavy tail distributions is the power law distribution, which is scale-free, as was and was shown by~\cite{Albert:2002p4071} to to lead to small world phenomenon~\cite{Watts:1998db}.
-
-% Many of these real-world networks turn out to share similar properties, such as the fact that they are small worlds, and are scale-free, which means that they have degrees obeying power laws.
-% The Erd\"os-R\'enyi random graph does not obey these properties.
-
+One of the these heavy tail distributions is the power law distribution, which is scale-free, as was and was shown by~\cite{Albert:2002p4071} to lead to the so-called small world phenomenon~\cite{Watts:1998db}.
 
 
 % A second way in which random graphs differ from their real-world counterparts is in their degree distributions, a point which has been emphasized particularly in the work of Albert, Baraba ́si, and collaborators (Albert et al., 1999; Baraba ́si and Albert, 1999). The probability pk that a vertex in an Erd ̋os–R ́enyi random graph has degree exactly k is given by the binomial distribution:
 
 
 % section random_graph_models (end)
-
-\section{The ramping parameter and credit concentration risk} % (fold)
-\label{sec:ramping_parameter}
-
-The ramping parameter model was developed in~\cite{Sindel:2009vd} and aims at assessing the concentration risk in real world loan portfolios. 
-In contrast to other methods for studying concentration risk, the ramping parameter takes into account both, the exposure- and the dependency-structure of the portfolio.
-A particular strength of this methodology is that it can be used universally.
-
-The ramping parameter monitors how the components of a graph (which represents the considered portfolio) decay as edges are removed increasingly according to their strength.
-It computes a curve that parameterizes the dependence of the effective exposure on the ramping parameter.
-
-
-% section ramping_parameter (end)
 
 \section{Organisation of this document} % (fold)
 \label{sec:organisation_of_this_document}
