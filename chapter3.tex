@@ -130,47 +130,83 @@ In practice, however, even large portfolios will be finite and there will be som
 
 
 
+
+Let $\rho \in \R$, and the function $f_\rho$ so that
+\begin{equation}
+\label{eqn:function}
+f_\rho: C \rightarrow A\\
+\\
+a_{ij} = \begin{cases} 1 & \text{if } c_{ij} > \rho \\
+                       0 & \text{if } c_{ij} \le \rho \\
+                       0 & \text{if } i = j
+        \end{cases}
+\end{equation}
+Let $g$ the pdf and $G$ the cdf of each element $c_{ij}$ of $C$.
+
+By defining $p = 1-G(\rho)$, we can write
+$$
+P( a_{ij} = 0 ) = P(c_{ij} \le \rho) = G(\rho) = 1-p
+$$
+and conversely
+$$
+P( a_{ij} = 1 ) = P(c_{ij} > \rho) = 1 - G(\rho) = p
+$$
+
+In a first step we define the space of correlation matrices 
+\begin{definition}
+The space of correlation matrices $\mathcal{C}_{n\times n} = \left( C, \mathcal{F},  g_C \right)$ consists of all matrices where
+\begin{itemize}
+\item[-] $C \in \R^{n \times n}$, such that $c_{ij} = c_{ji}$, $c_{ii} = 0$, 
+\item[-] $\mathcal{F}$ is the Borel $\sigma-$algebra on $C$,
+\item[-] and all elements $c_{ij}$ are i.i.d. random variables with a probability distribution $g$.
+\end{itemize}
+\end{definition}
+
+We want to identify matrices in $\mathcal{C}$ with adjacency matrices using a construction like the function \ref{eqn:function} defined above.
+As the image of $f$ depends only on $G(\rho)$  this map is not injective; more precisely two matrices $C_1$ and $C_2$ are mapped to the the same matrix $A$ if for each pair $i\neq j$ of indices the equation  $G(\rho) = 1-p$ is satisfied.
+We use this relation to define equivalence classes:
+
+\begin{definition}
+\label{def:equiv_correlation}
+Two matrices $C_1$ and $C_2$ are equivalent if the following condition is satisfied:
+\begin{equation}C_1\sim C_2\quad \Leftrightarrow \quad \forall i,j \,\ f_{\rho}(c^1_{ij}) = f_{\rho}(c^2_{ij})\,.\end{equation}
+Then the space of equivalence classes is denoted by $\widetilde{C}_{n\times n}$. 
+\end{definition}
+
+
+
 \begin{theorem}{Equivalence to random graph model}
-\label{thm:equivalence_rgm}
 Consider the following probability spaces:
 \begin{enumerate}
-	\item the space of correlation matrices $\mathcal{C}_{n\times n} = \left( C, \mathcal{F},  P_C \right)$,
+	\item the space of equivalence classes of correlation matrices $\widetilde{C}_{n\times n}$,
 	\item the space of unweighted adjacency matrices $\mathcal{A}_{n\times n} = \left( A, 2^A, P_A \right)$,
 	\item the space of random graphs $G_{n,p}$
 \end{enumerate}
 \noindent where,
 \begin{itemize}
-    \item[] $C \in \R^{n \times n}$, such that $c_{ij} = c_{ji}$, $c_{ii} = 0$, and all elements $c_{ij}$ are i.i.d. random variables
-	\item[] $\mathcal{F}$ is the Borel $\sigma-$algebra on $C$
-	\item[] $A \in \{0,1\}^{n \times n}$
-	\item[] $P_A = \begin{cases} 1 & \text{with probability } p,\\0 & \text{with probability } 1-p\end{cases}$, where $p \in [0,1]$ is given
-	\item[] $P_C$ is some probability distribution
+	\item[] $A \in \{0,1\}^{n \times n}$ such that $\forall i,j\,  a_{ij} = a_{ji} \text{ and } a_{ii} = 0$,
+	\item[] $P_A = \begin{cases} 1 & \text{with probability } p,\\0 & \text{with probability } 1-p\end{cases}$,
+	\item[] $P_C$ is some probability distribution,
+	\item[] an adjacency matrix is a (0,1)-matrix with zeros on its diagonal.
 \end{itemize}
 The probability spaces are equivalent.
 \end{theorem}
+
 \begin{proof}
 
+(2) $\Leftrightarrow$ (3):
+Given that a graph is defined unequivocally by its adjacency matrix, that all elements of $a_{ij}$ are by definition independent and that $P_A$ follows the same probability distribution as in $G_{n,p}$, both probability spaces are equivalent.
+ follows by the definition of $G_{n,p}$.
+\\
+(1) $\Leftrightarrow$ (2):
+The equivalence of $\widetilde{\mathcal{C}}_{n\times n}$ and $\mathcal{A}_n$ is a direct consequence of the definition~\ref{def:equiv_correlation} of the equivalence classes \\
 
-% \begin{theorem}{Equivalence to random graph model}
-% \label{thm:equivalence}
-% Let $M$ be a square symmetric random matrix with size $n \times n$ whose elements $m_{ij}$ are statistically independent and follow some continuous or discrete distribution $f$.
-% Let $F$ be the c.d.f. of this distribution.
-% Let $\tau \in [0,1]$ be a threshold parameter and define $$M_1 = \begin{cases}
-% 1 & \text{if  } m_{ij} \ge \tau\\
-% 0 & otherwise.
-% \end{cases}$$
-% Then, the graph defined by the adjacency matrix $M_1$ belongs to $G_{n, 1-\tau}$.
-% % - Ramping(Random Matrix) = Random Graph?
-% \end{theorem}
-% \begin{proof} The random graph model is defined by two conditions:
-% \begin{enumerate}
-% 	\item every edge exists independently
-% 	\item every edge exists with fixed common probability $p$.
-% \end{enumerate}
-% (1) By definition, every element of $m_{ij}$ from $M$ is drawn independently from each other, so condition (1) is met.\\
-% (2) each of the elements $m_{ij}$ are drawn from the same probability distribution. By the definition of the c.d.f. and $M_1$, with probability $\tau$ their value in $M_1$ will be $0$ (no edge exists) and probability $1-\tau$ the value will be $1$ (edge exists).
-% \end{proof}
-\todo{Discuss with Walter}
+
+\end{proof}
+
+
+
+
 \vspace{0.5cm}
 
 Theorem~\vref{thm:equivalence} allows us to apply the results of the random graph model to the study of the ramping parameter, by making some assumptions on the distribution of the portfolio interdependency matrix $\rmat$.
