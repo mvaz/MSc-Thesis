@@ -127,15 +127,31 @@ In particular, we assume:
 In practice, however, even large portfolios will be finite and there will be some error.
 \end{remark}
 
+
+
+
+\begin{theorem}{Equivalence to random graph model}
+\label{thm:equivalence_rgm}
+Consider the following probability spaces:
+\begin{itemize}
+	\item the space of correlation matrices $(\mathcal{C}_m)$
+	\item the space of unweighted adjacency matrices $(\mathcal{A}_m)$
+	\item the space of random graphs $G_{n,p}$
+\end{itemize}
+The probabilistic spaces are equivalent.
+\end{theorem}
+\begin{proof}
+\end{proof}
+
 \begin{theorem}{Equivalence to random graph model}
 \label{thm:equivalence}
-Let $M$ be a square symmetric random matrix with size $n \times n$ where its elements $m_{ij}$ are statistically independent and follow some continuous or discrete distribution $f$.
+Let $M$ be a square symmetric random matrix with size $n \times n$ whose elements $m_{ij}$ are statistically independent and follow some continuous or discrete distribution $f$.
 Let $F$ be the c.d.f. of this distribution.
 Let $\tau \in [0,1]$ be a threshold parameter and define $$M_1 = \begin{cases}
 1 & \text{if  } m_{ij} \ge \tau\\
 0 & otherwise.
 \end{cases}$$
-Then, the graph defined as the adjacency matrix $M_1$ belongs to $G_{n, 1-\tau}$.
+Then, the graph defined by the adjacency matrix $M_1$ belongs to $G_{n, 1-\tau}$.
 % - Ramping(Random Matrix) = Random Graph?
 \end{theorem}
 \begin{proof} The random graph model is defined by two conditions:
@@ -171,6 +187,23 @@ As seen in section~\vref{sub:giant_component}, \vref{eq:s_giant_component_lamber
 \begin{equation}
 	S = 1 + \frac{W(-c e^{-c})}{c}
 \end{equation}
+
+
+\subsubsection{Uniform distribution} % (fold)
+\label{ssub:uniform_distribution}
+
+By assuming that the $\rij$ are distributed uniformly between $[0,1]$
+
+% subsubsection uniform_distribution (end)
+
+\subsubsection{Truncated exponential distribution} % (fold)
+\label{ssub:truncated_exponential_distribution}
+
+By assuming that the $\rij$ are distributed uniformly between $[0,1]$
+
+% subsubsection uniform_distribution (end)
+
+
 
 % subsection giant_component (end)
 
