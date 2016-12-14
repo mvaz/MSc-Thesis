@@ -133,35 +133,43 @@ In practice, however, even large portfolios will be finite and there will be som
 \begin{theorem}{Equivalence to random graph model}
 \label{thm:equivalence_rgm}
 Consider the following probability spaces:
-\begin{itemize}
-	\item the space of correlation matrices $(\mathcal{C}_m)$
-	\item the space of unweighted adjacency matrices $(\mathcal{A}_m)$
+\begin{enumerate}
+	\item the space of correlation matrices $\mathcal{C}_{n\times n} = \left( C, \mathcal{F},  P_C \right)$,
+	\item the space of unweighted adjacency matrices $\mathcal{A}_{n\times n} = \left( A, 2^A, P_A \right)$,
 	\item the space of random graphs $G_{n,p}$
+\end{enumerate}
+\noindent where,
+\begin{itemize}
+    \item[] $C \in \R^{n \times n}$, such that $c_{ij} = c_{ji}$, $c_{ii} = 0$, and all elements $c_{ij}$ are i.i.d. random variables
+	\item[] $\mathcal{F}$ is the Borel $\sigma-$algebra on $C$
+	\item[] $A \in \{0,1\}^{n \times n}$
+	\item[] $P_A = \begin{cases} 1 & \text{with probability } p,\\0 & \text{with probability } 1-p\end{cases}$, where $p \in [0,1]$ is given
+	\item[] $P_C$ is some probability distribution
 \end{itemize}
-The probabilistic spaces are equivalent.
+The probability spaces are equivalent.
 \end{theorem}
 \begin{proof}
-\end{proof}
 
-\begin{theorem}{Equivalence to random graph model}
-\label{thm:equivalence}
-Let $M$ be a square symmetric random matrix with size $n \times n$ whose elements $m_{ij}$ are statistically independent and follow some continuous or discrete distribution $f$.
-Let $F$ be the c.d.f. of this distribution.
-Let $\tau \in [0,1]$ be a threshold parameter and define $$M_1 = \begin{cases}
-1 & \text{if  } m_{ij} \ge \tau\\
-0 & otherwise.
-\end{cases}$$
-Then, the graph defined by the adjacency matrix $M_1$ belongs to $G_{n, 1-\tau}$.
-% - Ramping(Random Matrix) = Random Graph?
-\end{theorem}
-\begin{proof} The random graph model is defined by two conditions:
-\begin{enumerate}
-	\item every edge exists independently
-	\item every edge exists with fixed common probability $p$.
-\end{enumerate}
-(1) By definition, every element of $m_{ij}$ from $M$ is drawn independently from each other, so condition (1) is met.\\
-(2) each of the elements $m_{ij}$ are drawn from the same probability distribution. By the definition of the c.d.f. and $M_1$, with probability $\tau$ their value in $M_1$ will be $0$ (no edge exists) and probability $1-\tau$ the value will be $1$ (edge exists).
-\end{proof}
+
+% \begin{theorem}{Equivalence to random graph model}
+% \label{thm:equivalence}
+% Let $M$ be a square symmetric random matrix with size $n \times n$ whose elements $m_{ij}$ are statistically independent and follow some continuous or discrete distribution $f$.
+% Let $F$ be the c.d.f. of this distribution.
+% Let $\tau \in [0,1]$ be a threshold parameter and define $$M_1 = \begin{cases}
+% 1 & \text{if  } m_{ij} \ge \tau\\
+% 0 & otherwise.
+% \end{cases}$$
+% Then, the graph defined by the adjacency matrix $M_1$ belongs to $G_{n, 1-\tau}$.
+% % - Ramping(Random Matrix) = Random Graph?
+% \end{theorem}
+% \begin{proof} The random graph model is defined by two conditions:
+% \begin{enumerate}
+% 	\item every edge exists independently
+% 	\item every edge exists with fixed common probability $p$.
+% \end{enumerate}
+% (1) By definition, every element of $m_{ij}$ from $M$ is drawn independently from each other, so condition (1) is met.\\
+% (2) each of the elements $m_{ij}$ are drawn from the same probability distribution. By the definition of the c.d.f. and $M_1$, with probability $\tau$ their value in $M_1$ will be $0$ (no edge exists) and probability $1-\tau$ the value will be $1$ (edge exists).
+% \end{proof}
 \todo{Discuss with Walter}
 \vspace{0.5cm}
 
@@ -199,7 +207,10 @@ By assuming that the $\rij$ are distributed uniformly between $[0,1]$
 \subsubsection{Truncated exponential distribution} % (fold)
 \label{ssub:truncated_exponential_distribution}
 
-By assuming that the $\rij$ are distributed uniformly between $[0,1]$
+By assuming that the $\rij$ are distributed uniformly between
+\begin{equation}
+	f(x) = - \frac{\alpha e^{- \alpha x}}{1-e^{-\alpha}}
+\end{equation}
 
 % subsubsection uniform_distribution (end)
 
