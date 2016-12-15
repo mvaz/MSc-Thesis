@@ -103,6 +103,93 @@ The ramping parameter monitors how the component structure of a graph (which rep
 % It computes a curve that parameterizes the dependency of the effective exposure on the ramping parameter.
 
 
+
+The approach proposed by~\cite{Sindel:2009vd} for quantifying the concentration risk of a loan portfolio works can be summarized as follows:
+\begin{itemize}
+	\item The mutual dependency between the obligors in a portfolio is represented by a matrix $\rho_{ij}$. This matrix is symmetric, the values $\rho_{ij} \in [0,1]$, and it will be called correlation matrix throughout the remainder of this document.
+	\item A so-called ramping parameter $\ramp \in [0,1]$ is used to define the effective correlation matrix $\rho_{ij}(\ramp)$ given the value of this  parameter:
+	\begin{equation}
+	\rho_{ij}(\ramp) = 
+		\begin{cases}
+		1 \text{ if } \rho_{ij} \ge \ramp,\\
+		0 \text{ otherwise}.
+		\end{cases}
+	\end{equation}
+	At $\ramp = 0$, the effective matrix will contain all connections in the original matrix. At $\ramp = 1$, all obligors in the effective matrix will be disconnected.
+	
+	\item The exposure-dependence is taken into account by computing the “effective” exposure for every value of $\ramp$.
+\end{itemize}
+
+To properly account for the Concentration Risk we compute the ratio $R(ρ∗)$ of the maximum of all exposures of all identified connected components $C_k$ and the total exposure of the portfolio
+of the portfolio and $j$ runs over all loans within the connected component $C_k$.
+\begin{figure}[tb]
+	\centering
+	\includegraphics[scale=0.5]{figures/ramping_parameter_example.png}
+	\caption{
+Stylized portfolio of six obligors (A, B, C, D, E, and F).
+The relative strength of the inter-obligor connections $\rho_{ij}$ is illustrated by the line-width.
+In the left figure, the interdependency between customer $D$ and the other customers is rather small.
+Additional to the individual inter-customer correlation each customer also has an individual obligation (symbolized by the differently coloured circles), indicated as $O_i$, $i \in \{A, B, C, D, E, F \}$.
+Both the obligation of the individual customer $O_i$ and the inter-customer correlations $\rho_{ij}$ are required to compute the Concentration Risk as suggested by our measure.
+For a particular value of the correlation strength obligor $D$ becomes independent from all other obligors of the portfolio.
+	}
+	\label{fig:6_pf_ramping}
+\end{figure}
+
+ 
+ 
+% And the next is a somewhat informal definition
+ 
+\begin{definition}{Portfolio}
+A credit portfolio is a tuple $(O, \hat{\rho})$, where $O$ is a set of $n$ exposures from $n$ different obligors and $\hat{\rho}$ an $n \times n$ matrix.
+The $\rmat$ matrix represents the interdependency (or correlation) between each obligor $i$, and each element $\rij \in [0,1]$.
+\end{definition}
+
+\begin{remark}
+Throughout this work, the matrix $\rmat$ is symmetric, so that $\forall i,j \rij = \rho_{ji}$ and the values of $\rho_{ij}$ are positive.
+Even though in the real world the dependency between obligors is not necessarily symmetric, e.g. in the case where obligor $i$ is asubsidiary of obligor $j$, the symmetry assumption renders the model more analytically tractable.
+\end{remark}
+
+
+
+The algorithm is described in~\ref{algo:ramping_parameter}.
+
+\begin{algorithm}
+\label{algo:ramping}
+\caption{Ramping parameter algorithm~\label{algo:ramping_parameter}}
+\State $\ramp \gets 0$
+
+\State $w$ \gets \textrm{order $O_{ij}$}
+
+\State $C$ \gets \{\}
+
+\State $\epsilon\gets \min\{w_{ij}\}$
+
+% 1. We systematically increase the ramping parameter ρ∗ from 0 to 1 with a suffi- ciently small step size.
+\For{$\ramp$ \in [0,1]}
+
+	M \gets \text{compute the obligor correlation matrix as shown in eq~\ref{}
+
+	G \gets ({O, {m_{ij}})
+
+	C \gets \text{all connected connected components of graph} G
+
+	R(\ramp) \gets \max_{C_k} \left(  \frac{\sum_{j\in C_k} \textrm{EAD}_j}{\sum_i \textrm{EAD}_i}  \right), where C_k\\
+
+\EndFor
+\end{algorithm}
+
+% 2. For each value of ρ∗ we compute the effective (inter) obligor-correlation matrix as shown in Eq. 3.2.
+% 3. We compute the number of connected components and the corresponding obli- gation in each component of the graph for every value of ρ∗.4
+% 4. To properly account for the Concentration Risk we compute the ratio R(ρ∗) of the maximum of all exposures of all identified connected components Ck and the total exposure of the portfolio
+% of the portfolio and j runs over all loans within the connected component Ck.
+
+% In Eq. (3.3) i runs over all loans of the portfolio, i EADi is the total obligation
+% Note that R(ρ∗) describes the risk of a portfolio associated with the default of its biggest clump for a given ρ∗. The risk related to a correlated default of the two biggest clumps - which has a very small probability - is not included in equation (3.3). Of course one could account for such scenarios in R(ρ∗) as well by adjusting formula (3.3). As correlated defaults are exponentially suppressed we do not incorporate them in
+
+
+
+
 \todo{add example}
 
 % section ramping_parameter (end)
