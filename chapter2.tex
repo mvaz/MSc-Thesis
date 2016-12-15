@@ -3,17 +3,79 @@
 
 
 
-In general, the complex networks - networks of both randomness and structure - studied in this article can be represented by an undirected and unweighed graph:
+The networks studied in this document can be represented by a single graph.
+In general, the term \textit{graph} is used for the mathematical object defined below and the term \textit{network} for some model that relies on one (or more) graphs.
+
+We begin by defining some terminology and proceed to described models of random graphs.
+
+\section{Definitions and essential results} % (fold)
+\label{sec:definitions_and_essential_results}
+
+\begin{definition}A graph $G$ is a tuple
 \begin{equation}
-G = (V,E)	
+G = (V,E),
 \end{equation}
-, where $V$ is the set of vertices (or nodes), and $E$ is the set of edges (or links).
+\noindent where $V$ is the set of vertices (or nodes), and $E$ is the set of edges (or links).
+Each edge connects exactly one pair of vertices, and a vertex-pair can be connected by maximally one edge, i.e., multi-connections are not allowed.
+Let furthermore $n$ denote the number of vertices $n = |V|$ and $L$ the number of edges $L = |E|$.
+\end{definition}
 
-Each edge connects exactly one pair of vertices, and a vertex-pair can be connected by maximally one edge, i.e., multi-connection is not allowed.
-Let furthermore $N$ denote the number of vertices $N = |V|$ and $L$ the number of edges $L = |E|$.
 
-For a social network [9], $V$ is a set of persons (or "actors" in sociology parlance) and $E$ is the set of acquaintance ties that links the persons together.
-In computer networks $V$ represent the routers or computers and $E$ the channels for computer communication.
+In this thesis, the set $V$ will correspond to the set of obligors in a portfolio, and $E$ to the interdependencies between the obligors.
+In the case of a social network, for example, $V$ would be the set of persons and $E$ could mean that two persons (nodes) are acquainted (connected) with each other.
+
+\begin{definition}A weighted graph $G$ is a graph where a number $x \in \R$ can be assigned to an element of $E$.\end{definition}
+
+\begin{definition}An unweighted graph $G$ is a graph where no number is assigned to an element of $E$.\end{definition}
+
+
+\begin{definition}The adjacency matrix $A$ of a graph $G = (V,E)$ is a matrix of size $n\times n$, such that each element $a_{ij}$ of the matrix is given by
+\begin{equation}
+	a_{ij} = \begin{cases}
+	1 & \text{if there is an edge between $i$ and $j$, i.e. } } \{i,j\} \in E\\
+	0 & \text{otherwise}
+	         \end{cases}
+\end{equation}
+If $G$ is a weighted graph, then the 
+\begin{equation}
+	a_{ij} = \begin{cases}
+	w_{ij} & \text{if there is an edge between $i$ and $j$ with weight $w_{ij}$ } }\\
+	0 & \text{otherwise}
+	         \end{cases}
+\end{equation}
+\end{definition}
+
+\begin{remark}Throughout this document we will be concerned with graphs without self-edges, so that $\forall i, \, a_{ii} = 0$.\end{remark}
+
+\begin{definition}An undirected graph $G$ is a graph where its adjacency matrix $A$ is symmetric, i.e. $\forall i,j, \, a_{ij} = a_{ji}$.\end{definition}
+
+\begin{definition}A connected component (or just component) of an undirected graph $G = (V,E)$ is a subgraph $G' = (V', E')$ where any two vertices $a,b$ are connected to each other by edges, and which is connected to no additional vertices in the supergraph.\end{definition}
+
+\begin{definition}The degree $d$ of a node $i$ in an undirected graph $G$ is the sum of the  elements of the $i^{th}$ row (column) of its adjacency matrix $A$, i.e. $d(i) = \sum_{j=1}^{j=n} a_{ij}$ .\end{definition}
+\begin{remark}In case $G$ is unweighted, then the degree of node $i$ is equal to the number of edges that connect to that node. In case $G$ is weighted, then it corresponds to the sum of the weights of the edges that connect to that node.\end{remark}
+
+
+\begin{definition}The degree matrix $D$ is a graph $G$ is an $n\times n $ matrix where its diagonal contains the degree of the corresponding vertices, i.e. where $$$d_{ij} = \begin{cases}
+    d(i) & \text{if } $i = j$ \\
+	0 & \text{ otherwise } 
+\end{cases}$$
+\end{definition}
+
+\begin{definition}The Laplacian~\footnote{Please note that there may be similar alternative definitions of the Laplacian matrix of a graph, but its properties equivalent w.r.t. the requirements for this thesis.}  matrix $L$ of a graph $G$ is given by $L = D - A$, where $D$ is the degree matrix and $A$ the adjacency matrix, as defined above.
+\end{definition}
+
+\begin{theorem}Connection between adjacency matrix and connected components.\end{theorem}
+\begin{remark}\end{remark}
+
+
+Example:
+
+$${\begin{pmatrix}0&1&0&0&1&0\\1&0&1&0&1&0\\0&1&0&1&0&0\\0&0&1&0&1&1\\1&1&0&1&0&0\\0&0&0&1&0&0\\\end{pmatrix}}$$
+
+
+
+% section definitions_and_essential_results (end)
+
 
 \section{Random graph model} % (fold)
 \label{sec:random_graph_model}
