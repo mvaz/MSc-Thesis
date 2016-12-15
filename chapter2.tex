@@ -173,6 +173,7 @@ In fact, any node in the graph is connected with independent probability $p$ to 
 Hence, the probability of having a particular degree $k$, i.e. being connected to exactly $k$ other nodes, is $p^k (1-p)^{n-1-k}$.
 Given that there are $\binom{n-1}{k}$ possible sets of $k$ vertices, the probability distribution of the node degree is given by
 \begin{equation}
+    \label{eq:degree_dist_naive}
 	p_k = \binom{n-1}{k} p^k (1-p)^{n-1-k}
 \end{equation}
 
@@ -180,25 +181,26 @@ Given that there are $\binom{n-1}{k}$ possible sets of $k$ vertices, the probabi
 We sometimes wish to consider not only small but also large networks.
 When $n$ is assumed to be large, some useful approximations can be made, which render the model more analytically tractable.
 
-\begin{remark}
-When $n\rightarrow \infty$, we can write
+When $n\rightarrow \infty$, we can rewrite
 \begin{align}
 	ln[(1-p)^{n-1-k}] &= (n-1-k) \ln\left( 1-\frac{c}{n-1} \right)\\
                       &\simeq (n-1-k) \frac{c}{n-1}\\
-                      &\simeq -c,
+                      &\simeq -c,\\
+\intertext{\noindent and therefore }
+    (1-p) ^{n-1-k} & \simeq e^{-c}
 \end{align}
-\noindent by using the Taylor expansion of $\ln\left(1-\frac{c}{n-1}\right)$ and approximating to the first term, which holds exactly when $n\rightarrow \infty$.
-\end{remark}
-
-
+\noindent by using the Taylor expansion of $\ln\left(1-\frac{c}{n-1}\right)$ and approximating to the first term.
+These approximations hold exactly when $n\rightarrow \infty$, as does the following approximation when
+\begin{align}
+    \binom{n-1}{k} = \frac{(n-1)!}{(n-1-k)! k!} \simeq \frac{(n-1)^k}{k!}
+\end{align}
+By applying both approximations under the assumption that $n \rightarrow \infty$, we can rewrite equation~\vref{eq:degree_dist_naive} as follows
 \begin{equation}
-	p_k = e^{-c} \frac{c^k}{k!}
+	p_k = \frac{(n-1)^k}{k!} p^k e^{-c} = e^{-c} \frac{c^k}{k!}
 \end{equation}
+which is the familiar Poisson distribution.
 
 % subsection mean_degree_and_degree_distribution (end)Mean degree and degree distribution
-
-
-
 
 
 \subsection{Giant component} % (fold)
@@ -207,14 +209,26 @@ When $n\rightarrow \infty$, we can write
 Although very simple, the random graph model possesses one very interesting property: the sudden appearance of the so-called giant component by varying the mean degree $c$.
 A giant component is a component whose size is proportional to the size of the network $n$, and its sudden appearance is called a \textit{phase transition}.
 
-We define as $u$ the vertices that do \textbf{not} belong to the giant component.
-Then, there is a giant component if and only if $u<1$.
+Consider the random graph $G_{n, p}$ with two extreme parametrisations:
+\begin{itemize}
+	\item[] $p = 0$, there are no edges in the graph, and therefore the largest component is of size $1$,
+	\item[] $p = 1$ every vertex is connected with every other vertex, and so the largest connected component has size $n$. 
+\end{itemize}
+Under $p=1$, the size of the largest component grows with the network.
+This is called a giant component, and its size can be computed exactly in the limit of a large network size.
 
-Suppose that, under the $G(n,p)$, vertex $i$ does not belong to the giant component.
+\begin{definition}
+Let $u$ denote the average fraction of vertices not in the giant component. Let $S$ be the reciprocal of $u$, $S = 1 - u$, i.e. the average relative size of the giant component.
+\end{definition}
+\noindent By definition the giant component exists if and only if $u<1$. Suppose that, under the $G(n,p)$, vertex $i$ does not belong to the giant component.
 Consider another vertex $j$.
-Either $i$ and $j$ are not connected with probability $1-p$, or there is an edge between $i$ and $j$ and $j$ also does not belong to the giant component, which has a probability of $pu$.
-Therefore, the probability that there is an edge $(i,j)$ is $1-p + pu$.
-If we now consider every nodes in the graph, then the probability that node $i$ is not in the giant component is $u$, and depends on it only being connected to nodes not being in the giant component.
+Either
+\begin{enumerate}[i)]
+	\item $i$ and $j$ are not connected with probability $1-p$, or
+	\item there is an edge between $i$ and $j$ and $j$ also does not belong to the giant component, which has a probability of $pu$.
+\end{enumerate}
+As such, the probability that there is an edge $(i,j)$ is $1-p + pu$.
+If we now consider every node in the graph, then the probability that node $i$ is not in the giant component is $u$, and depends on it only being connected to nodes not being in the giant component.
 Since every edge in the graph exists independently, then we have
 \begin{equation}
 	u = (1- p + pu)^{n-1} = \left[ 1 - \frac{c}{n-1} (1-u)\right]^{n-1}
@@ -227,7 +241,6 @@ When $n$ is large, $\frac{c}{n-1}$ is very small, so that we following approxima
 \begin{equation}
 	\ln\left( 1-\frac{c}{n-1} (1-u)\right) \approx - \frac{c}{n-1} (1-u)
 \end{equation}
-
 and therefore,
 \begin{equation}
 	\ln u \approx - c (1-u)
@@ -238,24 +251,26 @@ By taking the exponential of both sides, we can write it as
 \end{equation}
 Alternatively, one can consider the reciprocal of $u$, i.e. the fraction $S$ of nodes that do belong to the giant component.
 \begin{equation}
+    \label{eq:s_naive}
 	S = 1 - e^{-cS}
 \end{equation}
-\begin{equation}
-	c = - \frac{\ln(1-S)}{S}
-\end{equation}
-\noindent Although very simple, the equation has no closed-form solution~\cite{newman2010networks}.
+This equation has a trivial solution at $S = 0$, which is the only solution if $c \le 1$, i.e. there is no giant component if $c \le 1$.
+For $c > 1$, there is not only the trivial solution but also another solution at $S > 0$.
+\cite{newman2010networks} shows that the non-trivial solution best describes the giant component.
+
+\noindent Although very simple, equation~\ref{eq:s_naive} has no closed-form solution.
 It can be expressed through the \Lambert $W$-function~\footnote{The Lambert-W function is a set of functions representing the inverse relation of the function $f(z) = z e^{z}$ where $z$ is a complex number, i.e. {\displaystyle\, z=f^{-1}(ze^{z})=W(ze^{z})}}
 \begin{equation}
 S = 1 + \frac{W(-c e^{-c})}{c}
 \label{eq:s_giant_component_lambert}
 \end{equation}
-\noindent, for which there are standardized numerical software modules.
+\noindent, for which there are standardized numerical software module, e.g.~\cite{sympy}.
 
 \begin{figure}[tb]
 	\centering
-	\includegraphics[]{figures/s_as_function_of_p.png}
-	\caption{Caption here}
-	\label{fig:figure1}
+	\includegraphics[]{figures/2_s_as_function_of_c.png}
+	\caption{The fraction of the graph occupied by the giant component, $S$, as a function of the average expected degree $c$, and computed according to equation~\ref{eq:s_giant_component_lambert}. The phase transition at $c=1$ is well visible. For $c < 1$, no giant component is present, for $c>1$ it quickly occupies a dominating fraction of the network.}
+	\label{fig:s_as_function_of_c}
 \end{figure}
 
 % subsection giant_component (end)
@@ -284,13 +299,7 @@ with $S$ being the fractional size of the giant component, as given by equation~
 
 % section random_graph_model (end)
 
-\section{Configuration model} % (fold)
-\label{sec:configuration_model}
 
-The configuration model is one of the most popular null models for the study of the statistical properties of networks.
-It is inspired 
-
-% section configuration_model (end){Configuration model}
 
 \section{Generating functions} % (fold)
 \label{sec:generating_functions}
@@ -379,5 +388,16 @@ We continue to discuss the notion of highly connected graph sequences.
 
 % subsubsection component_sizes (end)Component sizes
 % section generating_functions (end)
+
+
+
+\section{Configuration model} % (fold)
+\label{sec:configuration_model}
+
+The configuration model is one of the most popular null models for the study of the statistical properties of networks.
+It is inspired 
+
+% section configuration_model (end){Configuration model}
+
 
 % chapter graphs_and_networks (end)
