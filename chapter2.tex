@@ -8,7 +8,7 @@ In general, the term \textit{graph} is used for the mathematical object defined 
 
 We begin by defining some terminology and proceed to described models of random graphs.
 
-\section{Definitions and essential results} % (fold)
+\section{Terminology and essential results} % (fold)
 \label{sec:definitions_and_essential_results}
 
 \begin{definition}A graph $G$ is a tuple
@@ -69,13 +69,22 @@ If $G$ is a weighted graph, then the
 \begin{definition}The Laplacian~\footnote{Please note that there may be similar alternative definitions of the Laplacian matrix of a graph, but its properties equivalent w.r.t. the requirements for this thesis.}  matrix $L$ of a graph $G$ is given by $L = D - A$, where $D$ is the degree matrix and $A$ the adjacency matrix, as defined above.
 \end{definition}
 
-\begin{remark}The graph Laplacian turns up in a large variety of places in network modelling, including diffusion processes, random walks, graph partitioning and, the most important for the purpose of this thesis, network connectivity.
-There is, in fact, a connection between the eigenvectors of the Laplacian matrix of a graph and its connected components, as we can see in the following theorem.\end{remark}
+\begin{remark}The graph Laplacian turns up in a large variety of places in network modelling, including diffusion processes, random walks, graph partitioning and, the most important for the purpose of this thesis, network connectivity.\end{remark}
 
-\begin{theorem}Let Connection between adjacency matrix and connected components.\end{theorem}
-
-For a graph with multiple connected components, L is a block diagonal matrix, where each block is the respective Laplacian matrix for each component, possibly after reordering the vertices (i.e. L is permutation-similar to a block diagonal matrix).
-
+There is, in fact, a connection between the eigenvectors of the Laplacian matrix of a graph and its connected components, which will allow us to easily compute the component structure of particular instances of graphs.
+In fact, a graph $G$ with multiple connected components $C_k$ will have a Laplacian matrix $L$ that is a block diagonal matrix.
+After reordering of the vertices, each block in this matrix will be the corresponding Laplacian matrix for each component $C_k$.
+\begin{theorem}
+Consider a graph $G$, with a Laplacian matrix $L$. Then,
+\begin{enumerate}[(i)]
+	\item all eigenvalues of $L$ ${\displaystyle \lambda _{0}\leq \lambda _{1}\leq \cdots \leq \lambda _{n-1}} \lambda_0 \le \lambda_1 \le \cdots \le \lambda_{n-1}$ are $\ge 0$
+	\item $\lambda_j = 0 \iff $ the corresponding eigenvector defines a connected component.
+\end{enumerate}
+\end{theorem}
+\begin{proof}The proof is left here undone, as it can be found in most books on networks, e.g.~\cite{newman2010networks}.\end{proof}
+\begin{remark}
+In order to find the connected	components of a graph, one can compute the null-eigenvalues and eigenvectors of its Laplacian matrix.
+\end{remark}
 
 Example:
 
