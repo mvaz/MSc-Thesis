@@ -69,8 +69,6 @@ Even though in the real world the dependency between obligors is not necessarily
 
 
 
-
-
 The algorithm is described in~\ref{algo:ramping_parameter}.
 
 \begin{algorithm}
@@ -293,26 +291,30 @@ This is already of great interest to the study of the ramping parameter, since i
 
 % subsection giant_component (end)
 
-\subsection{Component sizes} % (fold)
+\subsection{Small components' sizes} % (fold)
 \label{sub:component_sizes}
 
-Using the random graph model we know the distribution of the sizes of the connected components.
-From the previous chapter, we know that
+% Using the random graph model we know 
+From the previous chapter, we know that in the random graph model, the probability distribution of $\pi_s$, i.e. the probability that a randomly chosen node in the graph belongs to a component of size $s$.
+We also know that this distribution complements the giant component
 \begin{equation}
-	\pi_s = \frac{1}{s!}\left[  \frac{d^{s-1}}{dh^{s-1}}e^{s c(h-1)}  \right] = \frac{e^{-s c} (s c)^{s-1}}{s!}
+	\sum_{s=1}^{\infty} \pi_s = 1 - S
 \end{equation}
-so that the distribution of component sizes is given by
+\noindent and that it is given by
 \begin{equation}
-	n_s = \frac{\pi_s}{s} = \frac{e^{-s c} (s c)^{s-1}}{s\,s!}
+	\pi_s = \frac{1}{s!}\left[  \frac{d^{s-1}}{dh^{s-1}}e^{s c(h-1)}  \right] = \frac{e^{-s c} (s c)^{s-1}}{s!},
 \end{equation}
+What we are interested is, however, the actual number of components with size $s$.
+This can be easily derived by considering that $n_s$ will be related to $\pi_s$ in that $s$ nodes will belong to a component of size $s$.
+Therefore, 
+\begin{equation}
+	n_s = \frac{\pi_s}{s} = \frac{e^{-s c} (s c)^{s-1}}{s\,s!}.
+\end{equation}
+% We can see, 
 
 
 
 % subsection component_sizes (end)
-
-
-
-
 
 
 
