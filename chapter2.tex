@@ -49,23 +49,32 @@ If $G$ is a weighted graph, then the
 
 \begin{definition}An undirected graph $G$ is a graph where its adjacency matrix $A$ is symmetric, i.e. $\forall i,j, \, a_{ij} = a_{ji}$.\end{definition}
 
-\begin{definition}A connected component (or just component) of an undirected graph $G = (V,E)$ is a subgraph $G' = (V', E')$ where any two vertices $a,b$ are connected to each other by edges, and which is connected to no additional vertices in the supergraph.\end{definition}
+\begin{definition}A connected component (or just component) of an undirected graph $G = (V,E)$ is a subgraph $G' = (V', E')$ where:
+\begin{enumerate}[(i)]
+	\item $V'$ and $E'$ are subsets of $V$, $E$ respectively
+	\item any two vertices $a,b in V'$ are connected to each other by a sequence of edges $[ e_1,\ldots, e_k]$ such that $e_1, \ldots, e_k \in E'$
+	\item given a vertex $a \in V'$, for all vertices $b$ such that ${a,b} \in V'$, $b \in E'$.
+\end{enumerate}\end{definition}
 
-\begin{definition}The degree $d$ of a node $i$ in an undirected graph $G$ is the sum of the  elements of the $i^{th}$ row (column) of its adjacency matrix $A$, i.e. $d(i) = \sum_{j=1}^{j=n} a_{ij}$ .\end{definition}
+\begin{definition}The degree $k_i$ of a node $i$ in an undirected graph $G$ is the sum of the  elements of the $i^{th}$ row (column) of its adjacency matrix $A$, i.e. $k_i = \sum_{j=1}^{j=n} a_{ij}$ .\end{definition}
 \begin{remark}In case $G$ is unweighted, then the degree of node $i$ is equal to the number of edges that connect to that node. In case $G$ is weighted, then it corresponds to the sum of the weights of the edges that connect to that node.\end{remark}
 
 
-\begin{definition}The degree matrix $D$ is a graph $G$ is an $n\times n $ matrix where its diagonal contains the degree of the corresponding vertices, i.e. where $$$d_{ij} = \begin{cases}
-    d(i) & \text{if } $i = j$ \\
-	0 & \text{ otherwise } 
+\begin{definition}The degree matrix $D$ is a graph $G$ is an $n\times n $ matrix where its diagonal contains the degree of the corresponding vertices, i.e. where $$d_{ij} = \begin{cases}
+    k_i & \text{if } i = j \\
+	0 & \text{ otherwise.} 
 \end{cases}$$
 \end{definition}
 
 \begin{definition}The Laplacian~\footnote{Please note that there may be similar alternative definitions of the Laplacian matrix of a graph, but its properties equivalent w.r.t. the requirements for this thesis.}  matrix $L$ of a graph $G$ is given by $L = D - A$, where $D$ is the degree matrix and $A$ the adjacency matrix, as defined above.
 \end{definition}
 
-\begin{theorem}Connection between adjacency matrix and connected components.\end{theorem}
-\begin{remark}\end{remark}
+\begin{remark}The graph Laplacian turns up in a large variety of places in network modelling, including diffusion processes, random walks, graph partitioning and, the most important for the purpose of this thesis, network connectivity.
+There is, in fact, a connection between the eigenvectors of the Laplacian matrix of a graph and its connected components, as we can see in the following theorem.\end{remark}
+
+\begin{theorem}Let Connection between adjacency matrix and connected components.\end{theorem}
+
+For a graph with multiple connected components, L is a block diagonal matrix, where each block is the respective Laplacian matrix for each component, possibly after reordering the vertices (i.e. L is permutation-similar to a block diagonal matrix).
 
 
 Example:
