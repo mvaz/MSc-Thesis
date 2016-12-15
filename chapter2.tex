@@ -276,64 +276,36 @@ S = 1 + \frac{W(-c e^{-c})}{c}
 % subsection giant_component (end)
 
 
-
-
-
-
-
-
-\subsection{Component sizes} % (fold)
-\label{sub:component_sizes}
-
-
-Generating functions.
-
-The average size of $\mean{s}$ becomes 
-\begin{equation}
-	\mean{s} = \frac{1}{1-c-cS}
-\end{equation}
-with $S$ being the fractional size of the giant component, as given by equation~\ref{eq:s_giant_component_lambert}.
-
-% subsection component_sizes (end)
-
-
-% section random_graph_model (end)
-
-
-
 \section{Generating functions} % (fold)
 \label{sec:generating_functions}
 
+In order to determine other properties of the random graph model, it is helpful to consider generating functions, much like~\cite{Newman:zFi032Kd} does.
 
-
-We assume throughout this chapter that  follow~\cite{Newman:zFi032Kd}, which defines a set of generating functions for the probability distributions of some of the statistical properties of the graphs.
-The basis of these is the function $G_0(x)$ for the probability distribution of vertex degrees $k$, defined as
+We first consider the function $G_0(x)$, the probability distribution of vertex degrees $k$, defined as
 \begin{equation}
 G_0(x) = \sum_{k=0}^{\infty} p_k x^k
 \end{equation}
 where $p_k$ is the probability that a given vertex of the graph has degree $k$.
-
-- normalization assumption ($G_0(1) = 1$)
-- $G_0(x)$ is finite for all $|x| \le 1$
-
-The derivatives of this function can be used to derive other statistical quantities.
-For example, one can recover the probability $p_k$ by taking the $k^{th}$ derivative of the $G_0$
+The generating function has the interesting property that it encodes entire probability distribution.
+In particular, it is possible to recover the probability $p_k$ by taking the $k^{th}$ derivative of the $G_0$
 \begin{equation}
 	p_k = \frac{1}{k!} \frac{d^k G_0}{dx^k} \Big|_{x=0}.
 \end{equation}
-
-Furthermore, one can obtain the average degree $z$ of the nodes in a graph 
+The derivatives of this function can be used to derive other statistical quantities of the distribution.
+For example, one can obtain the average degree $c$ of the nodes in a graph
 \begin{equation}
-	z = \mean{k} = \sum_k k p_k = G'_0(1)
+	c = \mean{k} = \sum_k k p_k = G'_0(1)
 \end{equation}
-
-The function is given by the polylogarithm function
+Another important generating function is that of the probability of a randomly chosen vertex to belong to a component of a given size.
+This generating function $h(z)$ is given by
 \begin{equation}
-	\poly{n}{z} = \sum_{k=1}^{\infty} \frac{z^k}{k^n}
+	h(z) = \sum_{s=1}^{\infty} \pi_s z^s,
 \end{equation}
+\noindent where $\pi_s$ is the probability that a randomly chosen vertex belongs to a small component of size $s$.
+This function will be instrumental in being able to describe the component structure of the graph, as can be seen in section~\vref{sub:component_sizes}.
 
-\subsubsection{Component sizes} % (fold)
-\label{ssub:component_sizes}
+\subsection{Component sizes} % (fold)
+\label{sub:component_sizes}
 
 $H_1(x)$ follows the recursive condition
 \begin{equation}
@@ -362,17 +334,17 @@ For a Poisson random graph
 
 
 
-For a power law graph, this is given by
-\begin{equation}
-	G_1(x) = \frac{\poly{\tau-1}{xe^{-1/\kappa}}}{x\poly{\tau-1}{e^{-1/\kappa}}}
-\end{equation}
-and therefore
-\begin{equation}
-	G'_1(x) = \frac{\operatorname{Li}_{s - 2} \left(x e^{- 1/\kappa}\right)}
-	               {x^{2} \operatorname{Li}_{s - 1}\left(e^{- 1/\kappa}\right)} -
-	          \frac{\operatorname{Li}_{s - 1}\left(x e^{- 1/\kappa}\right)}
-	               {x^{2} \operatorname{Li}_{s - 1}\left(e^{- 1/\kappa}\right)}
-\end{equation}
+% For a power law graph, this is given by
+% \begin{equation}
+% 	G_1(x) = \frac{\poly{\tau-1}{xe^{-1/\kappa}}}{x\poly{\tau-1}{e^{-1/\kappa}}}
+% \end{equation}
+% and therefore
+% \begin{equation}
+% 	G'_1(x) = \frac{\operatorname{Li}_{s - 2} \left(x e^{- 1/\kappa}\right)}
+% 	               {x^{2} \operatorname{Li}_{s - 1}\left(e^{- 1/\kappa}\right)} -
+% 	          \frac{\operatorname{Li}_{s - 1}\left(x e^{- 1/\kappa}\right)}
+% 	               {x^{2} \operatorname{Li}_{s - 1}\left(e^{- 1/\kappa}\right)}
+% \end{equation}
 
 
 
@@ -388,6 +360,27 @@ We continue to discuss the notion of highly connected graph sequences.
 
 % subsubsection component_sizes (end)Component sizes
 % section generating_functions (end)
+
+
+
+
+\subsection{Component sizes} % (fold)
+\label{sub:component_sizes}
+
+
+Generating functions.
+
+The average size of $\mean{s}$ becomes 
+\begin{equation}
+	\mean{s} = \frac{1}{1-c-cS}
+\end{equation}
+with $S$ being the fractional size of the giant component, as given by equation~\ref{eq:s_giant_component_lambert}.
+
+% subsection component_sizes (end)
+
+
+% section random_graph_model (end)
+
 
 
 
