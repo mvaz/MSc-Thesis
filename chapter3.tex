@@ -263,7 +263,6 @@ In order to represent this, we assume that the $\rij$ are distributed according 
 The distribution is similar to the exponential distribution, but it is restricted to the domain $[0,1]$.
 Like the exponential distribution, it is governed by one parameter: $\alpha$.
 Its p.d.f. is as follows
-
 \begin{equation}
 	g(x) = - \frac{\alpha e^{- \alpha x}}{1-e^{-\alpha}}
 \end{equation}
@@ -271,15 +270,22 @@ Its p.d.f. is as follows
 \begin{equation}
 	G(x) = \frac{1 - e^{-\alpha x}}{1-e^{-\alpha}}.
 \end{equation}
-
-
+The behaviour of the p.d.f. can be seen in figure~\vref{fig:exponential_distribution}. Larger values of the parameter $\alpha$ lead to more probability being concentrated with lower values of the r.v..
+\begin{figure}[tb]
+	\centering
+	\includegraphics[scale=.8]{figures/3_exponential_distribution_pdf.png}}
+	\caption{Probability density function of truncated exponential distribution with different values of the parameter $\alpha$.}
+	\label{fig:exponential_distribution}
+\end{figure}
+The fact that much more probability density is concentrated on lower correlation values leads to an earlier and smoother disaggregation of the giant component.
+The point at which the giant component disappears is also strongly dependent on the value of the parameter $\alpha$, which can be observed in figure~\vref{fig:exponential_giant_component}.
 \begin{figure}[tb]
 	\centering
 	\includegraphics[scale=.8]{figures/3_exponential_giant_component.png}
 	\caption{Relative size $S$ of giant component as a function of the ramping parameter $\rho$ given truncated exponential distributions  of the correlation weights with different parameters $\alpha$.}
 	\label{fig:exponential_giant_component}
 \end{figure}
-
+This is already of great interest to the study of the ramping parameter, since it indicates a strong sensitivity to the distribution of the correlation values, independently of whether additional structure being available (which goes beyond of this chapter).
 
 % subsubsection uniform_distribution (end)
 
