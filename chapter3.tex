@@ -302,6 +302,7 @@ We also know that this distribution complements the giant component
 \end{equation}
 \noindent and that it is given by
 \begin{equation}
+\label{eq:dist_size_components}
 	\pi_s = \frac{1}{s!}\left[  \frac{d^{s-1}}{dh^{s-1}}e^{s c(h-1)}  \right] = \frac{e^{-s c} (s c)^{s-1}}{s!},
 \end{equation}
 What we are interested is, however, the actual number of components with size $s$.
@@ -310,9 +311,43 @@ Therefore,
 \begin{equation}
 	n_s = \frac{\pi_s}{s} = \frac{e^{-s c} (s c)^{s-1}}{s\,s!}.
 \end{equation}
-% We can see, 
+As hinted above, the situation is clearly dependent on whether the giant component exists in the graph.
+In order to illustrate this, we show a histogram of the distribution of $n_s$ in figure~\ref{fig:distribution_sizes}.
+\begin{figure}[tb]
+	\centering
+	\includegraphics[scale=.9]{figures/3_distribution_sizes.png}}
+	\caption{Histogram of $n_s$ for graphs with two different mean degree values. $c=0.75$ means that there is no giant component while $c=1.5$ guarantees the presence of the giant component. As can be seen, the probabilities of the component sizes is significantly lower in the case where the giant component exists, the reason for this being the fact that a fraction of the nodes belongs to the giant component and not to a small component.}
+	\label{fig:distribution_sizes}
+\end{figure}
 
 
+\begin{theorem}{Maximum component sizes}
+Let $n_s$ be the distribution of the component sizes under the random graph model. 
+Then, the 
+\end{theorem}
+\begin{proof}
+We are interested in the distribution of 
+$$Y=max\left{C_1,\ldots,C_k\right}$$
+\noindent where $C_i$ is the size of connected component $i$, and $k$ is the number of connected components in the graph.
+Because every edge in the network exists independently, the $C_i$ variables are i.i.d. with p.d.f. given by equation
+We know that 
+
+
+where X1,...,XnX1,...,Xn are iid Uniform(a,b)Uniform(a,b). We know that Y<xY<x if and only if every element of the sample is less than xx. Then this, as indicated in @varty's hint, combined with the fact that the XiXi's are independent, allows us to deduce
+
+P(Y≤x)=P(X1≤x,...,Xn≤x)=∏i=1nP(Xi≤x)=FX(x)n
+P(Y≤x)=P(X1≤x,...,Xn≤x)=∏i=1nP(Xi≤x)=FX(x)n
+where FX(x)FX(x) is the CDF of the uniform distribution. Therefore the CDF of YY is
+FY(y)=P(Y≤y)=⎧⎩⎨⎪⎪0[(y−a)/(b−a)]n1y≤ay∈(a,b)y≥b
+FY(y)=P(Y≤y)={0y≤a[(y−a)/(b−a)]ny∈(a,b)1y≥b
+Since YY has an absolutely continuous distribution we can derive its density by differentiating the CDF. Therefore the density of YY is
+
+pY(y)=n(y−a)n−1(b−a)n
+pY(y)=n(y−a)n−1(b−a)n
+In the special case where a=0,b=1a=0,b=1, we have that pY(y)=nyn−1pY(y)=nyn−1, which is the density of a Beta distribution with α=nα=n and β=1β=1, since Beta(n,1)=Γ(n+1)Γ(n)Γ(1)=n!(n−1)!=nBeta(n,1)=Γ(n+1)Γ(n)Γ(1)=n!(n−1)!=n.
+
+	
+\end{proof}
 
 % subsection component_sizes (end)
 
@@ -320,12 +355,12 @@ Therefore,
 
 
 
-\begin{figure}[tb]
-	\centering
-	\includegraphics[]{figures/gnp_number_components.png}
-	\caption{Number of components as a function of the probability $p$ of the $G(n,p)$ model.}
-	\label{fig:figure1}
-\end{figure}
+% \begin{figure}[tb]
+% 	\centering
+% 	\includegraphics[]{figures/gnp_number_components.png}
+% 	\caption{Number of components as a function of the probability $p$ of the $G(n,p)$ model.}
+% 	\label{fig:figure1}
+% \end{figure}
 
 
 \begin{itemize}
