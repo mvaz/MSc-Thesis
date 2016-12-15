@@ -83,12 +83,39 @@ Consider a graph $G$, with a Laplacian matrix $L$. Then,
 \end{theorem}
 \begin{proof}The proof is left here undone, as it can be found in most books on networks, e.g.~\cite{newman2010networks}.\end{proof}
 \begin{remark}
-In order to find the connected	components of a graph, one can compute the null-eigenvalues and eigenvectors of its Laplacian matrix.
+In order to find the connected components of a graph, one can compute the null-eigenvalues and eigenvectors of its Laplacian matrix.
 \end{remark}
-
-Example:
-
-$${\begin{pmatrix}0&1&0&0&1&0\\1&0&1&0&1&0\\0&1&0&1&0&0\\0&0&1&0&1&1\\1&1&0&1&0&0\\0&0&0&1&0&0\\\end{pmatrix}}$$
+We consider the following example of a graph
+\begin{figure}[hb]
+	\centering
+	\includegraphics[scale=0.8]{figures/2_example_graph.png}
+	\caption{Example graph with 2 components and 6 nodes.}
+	\label{fig:example_graph}
+\end{figure}
+which has following (rows and columns 4,5 permutated) adjacency matrix
+$$
+A = \begin{bmatrix}
+  0 & 1 & 0 & 1 & 0 & 0\\
+  1 & 0 & 1 & 1 & 0 & 0\\
+  0 & 1 & 0 & 0 & 0 & 0\\
+  1 & 1 & 0 & 0 & 0 & 0\\
+  0 & 0 & 0 & 0 & 0 & 1\\
+  0 & 0 & 0 & 0 & 1 & 0\\
+\end{bmatrix}
+$$
+\noindent and Laplacian matrix
+% $${\begin{pmatrix}0&1&0&0&1&0\\1&0&1&0&1&0\\0&1&0&1&0&0\\0&0&1&0&1&1\\1&1&0&1&0&0\\0&0&0&1&0&0\\\end{pmatrix}}$$
+$$
+L = \begin{bmatrix}
+  2 & -1 & 0 & -1 & 0 & 0\\
+  -1 & 3 & -1 & -1 & 0 & 0\\
+  0 & -1 & 1 & 0 & 0 & 0\\
+  -1 & -1 & 0 & 2 & 0 & 0\\
+  0 & 0 & 0 & 0 & 1 & -1\\
+  0 & 0 & 0 & 0 & -1 & 1\\
+\end{bmatrix}
+$$
+The block- structure of the Laplacian matrix is well visible and easy to correspond to the community structure in the plotted graph.
 
 
 
