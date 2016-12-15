@@ -299,6 +299,7 @@ For example, one can obtain the average degree $c$ of the nodes in a graph
 Another important generating function is that of the probability of a randomly chosen vertex to belong to a component of a given size.
 This generating function $h(z)$ is given by
 \begin{equation}
+    \label{eq:gen_func_comp_sizes}
 	h(z) = \sum_{s=1}^{\infty} \pi_s z^s,
 \end{equation}
 \noindent where $\pi_s$ is the probability that a randomly chosen vertex belongs to a small component of size $s$.
@@ -307,26 +308,61 @@ This function will be instrumental in being able to describe the component struc
 \subsection{Component sizes} % (fold)
 \label{sub:component_sizes}
 
-$H_1(x)$ follows the recursive condition
+Consider the probability that $P(s|k)$ that node $a$ with degree $k$ is part of a small component of size $s$.
+We can express this probability based on the probability that all $k$ connected nodes belong to a sub-component with with sizes $s_1, \ldots, s_k$, given by $\Pi_{j=1}^{k} \pi_{s_j}$ such that $\sum s_j = 1$:
 \begin{equation}
-	H_1(x) = x G_1( H_1(x))
+	P(s|k) = \sum_{s_1 = 1}^{\infty} \ldots \sum_{s_k = 1}^{\infty} \left[ \Pi_{j=1}^k \pi_{s_j} \right] \delta(s-1, \sum_j s_j),
+\end{equation}
+and $\delta$ is the Kronecker delta.
+
+As seen above, $\pi_s$ is the probability that a randomly chosen vertex belongs to a component of size $s$.
+$\pi_s$ can be expressed through $P(s|k)$ as
+\begin{align}
+	\pi_s & = \sum_{k=0}^\infty p_k P(s| k) = \sum_{k=0}^\infty p_k \sum_{s_1 = 1}^{\infty} \ldots \sum_{s_k = 1}^{\infty} \left[ \Pi_{j=1}^k \pi_{s_j} \right] \delta(s-1, \sum_j s_j) \\
+	      & = e^{-c} \sum_{k=0}^\infty \frac{c^k}{k!} \sum_{s_1 = 1}^{\infty} \ldots \sum_{s_k = 1}^{\infty} \left[ \Pi_{j=1}^k \pi_{s_j} \right] \delta(s-1, \sum_j s_j)
+\end{align}
+Substituting in the generating function given by equation~\ref{eq:gen_func_comp_sizes}, we get
+\begin{align}
+	h(z) & = \sum_{s=1}^{\infty} z^s e^{-c} \sum_{k=0}^\infty \frac{c^k}{k!} \sum_{s_1 = 1}^{\infty} \ldots \sum_{s_k = 1}^{\infty} \left[ \Pi_{j=1}^k \pi_{s_j} \right] \delta(s-1, \sum_j s_j) \\
+	     & = e^{-c} \sum_{k=0}^\infty \frac{c^k}{k!} \sum_{s_1 = 1}^{\infty} \ldots \sum_{s_k = 1}^{\infty} \left[ \Pi_{j=1}^k \pi_{s_j} \right] z^{1+\sum_j s_j} \\
+	     & = z e^{-c} \sum_{k=0}^\infty \frac{c^k}{k!} \sum_{s_1 = 1}^{\infty} \ldots \sum_{s_k = 1}^{\infty} \left[ \Pi_{j=1}^k \pi_{s_j} z ^ {s_j}\right] \\
+	     & = z e^{-c} \sum_{k=0}^\infty \frac{c^k}{k!} \left[ \sum_{s=1}^{\infty} \pi_s z^s \right]^k \\
+	     & = z e^{-c} \sum_{k=0}^\infty \frac{c^k}{k!} \left[ h(z) \right]^k \\
+	     & = z \exp\left( c\, (h(z) -1) \right)~\label{eq:h_z}
+\end{align}
+and obtain a surprisingly simple form, which does not have a closed form solution.
+
+Using Eq.~\ref{eq:h_z} we can describe the average size of the component a randomly chosen vertex belongs to by
+\begin{equation}
+	\mean{s} = \frac{\sum_s s \pi_s}{\sum_s \pi_s} = \frac{h'(1)}{1-S}
+\end{equation}
+Since
+\begin{align*}
+	h'(z) & = \exp\left( c(h(z) - 1)  \right) 
+	        + c z h'(z)\exp\left( c(h(z) - 1)  \right) \\
+	      & = \frac{h(z)}{z} + c h(z) h'(z),
+\end{align*}
+By further simplifying and making $z=1$
+\begin{equation}
+	h'(1) = \frac{h(1)}{1- ch(1)}
 \end{equation}
 
 
+% $H_1(x)$ follows the recursive condition
+% \begin{equation}
+% 	H_1(x) = x G_1( H_1(x))
+% \end{equation}
+
+
+
+% \begin{equation}
+% \mean{s} = 1 + \frac{G'_0(1)}{1-G'_1(1)}	
+% \end{equation}
 
 
 
 
-
-
-\begin{equation}
-\mean{s} = 1 + \frac{G'_0(1)}{1-G'_1(1)}	
-\end{equation}
-
-
-
-
-For a Poisson random graph
+% For a Poisson random graph
 
 
 
@@ -349,13 +385,13 @@ For a Poisson random graph
 
 
 
-In some networks, the degree distribution for large values is not quite a power law, while for small values it is. This is particularly appropriate when there are costs associated with having large degrees. For example, building and maintaining a large social network, or publishing papers with many people, requires time and energy, both of which are limited. Therefore, one cannot really expect to see the huge fluctuations that are predicted by power-law distributions. A related model is a power law with an exponential cut off, where the probability mass function is given by
-\begin{equation}
-	p_k = ck^{-\tau} e^{− k / A}, k \ge 1,
-\end{equation}
+% In some networks, the degree distribution for large values is not quite a power law, while for small values it is. This is particularly appropriate when there are costs associated with having large degrees. For example, building and maintaining a large social network, or publishing papers with many people, requires time and energy, both of which are limited. Therefore, one cannot really expect to see the huge fluctuations that are predicted by power-law distributions. A related model is a power law with an exponential cut off, where the probability mass function is given by
+% \begin{equation}
+% 	p_k = ck^{-\tau} e^{− k / A}, k \ge 1,
+% \end{equation}
 
-for some large A. Thus, for k small compared to A the distribution looks like a power law, while for values that are large compared to A the exponential decay takes over.
-We continue to discuss the notion of highly connected graph sequences.
+% for some large A. Thus, for k small compared to A the distribution looks like a power law, while for values that are large compared to A the exponential decay takes over.
+% We continue to discuss the notion of highly connected graph sequences.
 
 
 % subsubsection component_sizes (end)Component sizes
@@ -364,17 +400,17 @@ We continue to discuss the notion of highly connected graph sequences.
 
 
 
-\subsection{Component sizes} % (fold)
-\label{sub:component_sizes}
+% \subsection{Component sizes} % (fold)
+% \label{sub:component_sizes}
 
 
-Generating functions.
+% Generating functions.
 
-The average size of $\mean{s}$ becomes 
-\begin{equation}
-	\mean{s} = \frac{1}{1-c-cS}
-\end{equation}
-with $S$ being the fractional size of the giant component, as given by equation~\ref{eq:s_giant_component_lambert}.
+% The average size of $\mean{s}$ becomes 
+% \begin{equation}
+% 	\mean{s} = \frac{1}{1-c-cS}
+% \end{equation}
+% with $S$ being the fractional size of the giant component, as given by equation~\ref{eq:s_giant_component_lambert}.
 
 % subsection component_sizes (end)
 
@@ -384,11 +420,11 @@ with $S$ being the fractional size of the giant component, as given by equation~
 
 
 
-\section{Configuration model} % (fold)
-\label{sec:configuration_model}
+% \section{Configuration model} % (fold)
+% \label{sec:configuration_model}
 
-The configuration model is one of the most popular null models for the study of the statistical properties of networks.
-It is inspired 
+% The configuration model is one of the most popular null models for the study of the statistical properties of networks.
+% It is inspired 
 
 % section configuration_model (end){Configuration model}
 
