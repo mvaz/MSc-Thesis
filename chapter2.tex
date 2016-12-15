@@ -140,17 +140,18 @@ As with other models studied in this thesis, statements made about the model are
 \begin{figure}[tb]
 	\centering
 	\includegraphics[width=10cm]{figures/gnp_hairball.png}
-	\caption{Plot a random graph with $n = $ nodes and edge probability $p = $}
-	\label{fig:figure1}
+	\caption{Plot of a random graph with $n = 1000$ nodes, edge probability $p = 0.003$ and $c=3$. 
+	Nodes belonging to the same connected component are coloured identically.
+	We can see a dominating large component in the graph through the light blue nodes in the centre.
+	The existence of this dominating component is described in section~\ref{sub:giant_component}.}
+	\label{fig:hairball}
 \end{figure}
 
 The random graph model is especially interesting because several of its statistical properties can be derived analytically.
 The properties of the networks it generates, however, differ substantially from those observed in real world networks~\cite{Albert:2002p4071}.
 
-
 \subsection{Mean degree and degree distribution} % (fold)
 \label{ssub:mean_degree_and_degree_distribution}
-
 
 In the random graph model, the existence of any edge is independent from each other and solely determined by the same probability value $p$.
 As such, the probability of a graph with $m$ edges drawn from the $G(n,p)$ model is given by a binomial distribution choosing $m$ edges out of a universe of $\binom{n}{2}$ edges
@@ -161,22 +162,34 @@ Therefore, the expected number of edges is given by
 \begin{equation}
 	\mean{m} = \sum^{\binom{n}{2}}_{m=0} m P(m) = \binom{n}{2} p
 \end{equation}
-
 % In the course of this document, we will be not only interested on the properties of the graph itself, but also on how they build from the individual properties of the edges and nodes.
-Using this result, we can compute the expected mean node degree $c$ in a graph, as
+Using this result, we can derive the expected mean node degree $c$ in a graph
 \begin{equation}
 	c = \sum^{\binom{n}{2}}_{m=0} \frac{2m}{n} P(m) = \frac{2}{n} \binom{n}{2} p = (n-1) p,
 \end{equation}
 
-More generally, we can not only find the mean, but also the entire distribution of the node degree.
+More generally, we can not only derive the mean, but also the entire distribution of the node degree.
 In fact, any node in the graph is connected with independent probability $p$ to any of the remaining $n-1$ nodes in the graph.
 Hence, the probability of having a particular degree $k$, i.e. being connected to exactly $k$ other nodes, is $p^k (1-p)^{n-1-k}$.
 Given that there are $\binom{n-1}{k}$ possible sets of $k$ vertices, the probability distribution of the node degree is given by
 \begin{equation}
 	p_k = \binom{n-1}{k} p^k (1-p)^{n-1-k}
 \end{equation}
-When considering large networks we assume $n$ to be large, so that 
-$$\ldots   \textrm{derivation of the limit}$$
+
+
+We sometimes wish to consider not only small but also large networks.
+When $n$ is assumed to be large, some useful approximations can be made, which render the model more analytically tractable.
+
+\begin{remark}
+When $n\rightarrow \infty$, we can write
+\begin{align}
+	ln[(1-p)^{n-1-k}] &= (n-1-k) \ln\left( 1-\frac{c}{n-1} \right)\\
+                      &\simeq (n-1-k) \frac{c}{n-1}\\
+                      &\simeq -c,
+\end{align}
+\noindent by using the Taylor expansion of $\ln\left(1-\frac{c}{n-1}\right)$ and approximating to the first term, which holds exactly when $n\rightarrow \infty$.
+\end{remark}
+
 
 \begin{equation}
 	p_k = e^{-c} \frac{c^k}{k!}
