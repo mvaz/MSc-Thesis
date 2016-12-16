@@ -218,6 +218,7 @@ This can be easily derived by considering that $n_s$ will be related to $\pi_s$ 
 Therefore, 
 \begin{equation}
 	n_s = \frac{\pi_s}{s} = \frac{e^{-s c} (s c)^{s-1}}{s\,s!}.
+	\label{eq:n_s}
 \end{equation}
 As hinted above, the situation is clearly dependent on whether the giant component exists in the graph.
 In order to illustrate this, we show a histogram of the distribution of $n_s$ in figure~\ref{fig:distribution_sizes}.
@@ -231,21 +232,37 @@ In order to illustrate this, we show a histogram of the distribution of $n_s$ in
 
 \begin{theorem}{Size largest component}
 \label{thm:max_comp_size}
-Let $n_s$ be the distribution of the component sizes under the random graph model, $k$ be the number of components in the graph, $C_i$ the size of component $i$.
-Then $Y=max\left\{ C_1,\ldots,C_k\right\}$, the size of the largest component in the network, is a r.v. with probability distribution given by
+Let $n_s$ be the distribution of the non-giant component sizes under the random graph model, $k$ be the number of components in the graph, $C_i$ the size of component $i$.
+Then $Y=max\left\{ C_1,\ldots,C_k\right\}$, the size of the largest non-giant component in the network, is a r.v. with probability distribution given by
 by $F_Y(y) = (\sum_{s=1}^{y} n_s)^k$.
 \end{theorem}
 \begin{proof}
-Since every edge in the network exists independently, the $C_i$ variables are i.i.d. with p.d.f. given by equation
+Since every edge in the network exists independently, the $C_i$ variables are i.i.d. with p.d.f. given by equation~\ref{eq:n_s}.
 We know that 
 $$P(Y\le y) = P (C_1 \le y, \ldots , C_k \le y) = \Pi_{i=1}^{k} P(C_i \le y)$$
 By definition, $P(C_i \le x) = \sum_{s=1}^y n_s$, and so $F_Y(y) = \left( \sum_{s=1}^y n_s \right)^k$.
 \end{proof}
 \vspace{0.3cm}
 \begin{remark}
-Theorem~\vref{thm:max_comp_size} is only of limited help due to the fact that the number of components in the graph is not known a priori in the random graph model.
+Theorem~\vref{thm:max_comp_size} is only of limited help due to the fact that the number of components $k$ in the graph is not known a priori in the random graph model.
 Its distribution is, however, known and can be used to compute a numerical estimate of the distribution above.
 \end{remark}
+
+
+
+If we consider $c > 1$, then the size of the largest component is trivially given by $S$.
+In the case of $c \le 1$, then we must consider the distribution $Y$ given by Theorem~\ref{thm:max_comp_size}.
+We consider the expected number of components to be given by
+\begin{equation}
+	k = \sum_{s=1}^{\infty} n_s
+\end{equation}
+and the expected maximal component
+\begin{equation}
+	E[Y] = \sum_s s P(Y=s)
+\end{equation}
+% Then,
+
+
 
 \begin{figure}[tb]
 	\centering
@@ -253,6 +270,17 @@ Its distribution is, however, known and can be used to compute a numerical estim
 	\caption{Number of components as a function of the probability $p$ of the $G(n,p)$ model.}
 	\label{fig:gnp_number_components}
 \end{figure}
+
+
+\begin{figure}[tb]
+	\centering
+	\includegraphics[scale=1.]{figures/3_largest_component.png}
+	\caption{Largest component as a fraction of the graph.}
+	\label{fig:gnp_largest_component}
+\end{figure}
+
+
+
 % subsection component_sizes (end)
 
 
