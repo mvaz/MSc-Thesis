@@ -34,6 +34,7 @@ This thesis studies value of the ramping parameter model expected by the random 
 As show in chapter~\ref{cha:ramping_parameter_under_the_random_graph_model}, under the random graph model, we show that it is possibly to calculate the expected size of the largest connected component, and, thanks to assumption (1), the expected value of the ramping parameter for each value $\ramp$.
 In particular, this result takes into account the overall distribution of the correlation values of the original correlation matrix.
 
+Not only were the theoretical results described, but also the Python code for computing the statistical quantities is provided.
 
 
 \section{Outlook and future work}
@@ -44,6 +45,7 @@ While it ensures the convergence to a possibly useful result, it leaves many que
 
 For us, the main unanswered question is to which extent the theoretical curve computed in the end of section~\ref{sub:small_component_sizes} can be used for determining the weight curve (see Equation~\vref{eq:ramping_integral}).
 Our hypothesis is that it could serve as some sort of null model and therefore lead to a weight curve and measure of concentration risk that takes the insights from the random graph models into account.
+It would also be important to observe the curve under the empirical distribution of correlations from a real portfolio.
 
 Another question arises as to whether other, more expressive models of random graphs, can be used.
 One such model is the configuration model, which can express the properties of graphs with more realistic degree distributions, such as the popular power law distribution.
