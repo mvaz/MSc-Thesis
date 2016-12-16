@@ -63,17 +63,23 @@ of credit concentration risk}
 
 
 
-Banking regulators (Basel II) require market participants to identify and monitor concentration risk in their credit portfolios. Concentration risk is the risk arising from high exposure to single risk factors. Standard concentration measures rely mainly on the aggregation of the measures of each portfolio element and, for example sectorial allocation~\cite{lutkebohmert2008concentration}.
-They underestimate, however, direct economic links between the elements of the portfolio and therefore the underlying structure of the portfolio.
+Banking regulators (Basel II) require market participants to identify and monitor concentration risk in their credit portfolios.
+Concentration risk is the risk arising from high exposure to single risk factors.
+Standard concentration measures rely mainly on the aggregation of the measures of each portfolio element at, for example, the economic sector of activity~\cite{lutkebohmert2008concentration}.
+While these models performs well at predefined aggregation levels, they usually underestimate direct obligor-specific economic links and, possibly, the latent dependency structure of the portfolio.
 The importance of structural measures has been confirmed by recent financial events, where large losses arising from worldwide contagion effects were registered~\cite{Kazi:2013vr}.
 	
-Network models are especially apt at identifying structural properties~\cite{newman2010networks}, as they take not only model the elements of a system (the nodes or vertices) but also the relations between those elements (the edges). Network models are proving to be useful tools for providing early-warning signals of systemic risk~\cite{Squartini:2013ev}, measuring liquidity risk~\cite{Karas:2012tp}, identifying sectors from time-series correlations~\cite{Onnela:2004vz,Fenn:2009uf,Fenn:2011kp}, as well as insights into finding diversified baskets of assets in the classical investment framework~\cite{Pozzi:2013ci}.
+Network models are especially apt at identifying structural properties~\cite{newman2010networks}, as they take not only model the elements of a system (the nodes or vertices) but also the relations between those elements (the edges).
+Network models are proving to be useful tools for providing early-warning signals of systemic risk~\cite{Squartini:2013ev}, measuring liquidity risk~\cite{Karas:2012tp}, identifying sectors from time-series correlations~\cite{Onnela:2004vz,Fenn:2009uf,Fenn:2011kp}, as well as insights into finding diversified baskets of assets in the classical investment framework~\cite{Pozzi:2013ci}.
+Many other use cases are described in the recent book~\cite{Soramaki2016}.
 
-Previous work on concentration risk with network model~\cite{Sindel:2009vd} used a ramping parameter for eliminating correlations (connections) that have a smaller strength than the ramping parameter, and measured the community structure of the resulting network. The evolution of the number of isolated components with the ramping parameter provides an insight into how strongly interdependent the portfolio is.
+Previous work on concentration risk relied on a network intepretation of a portfolio~\cite{Sindel:2009vd} by using a varying (ramping) parameter for progressively eliminating interdependencies between obligors, and analysed the relative exposure size of the component with largest exposure.
+Using a weight function, this relative exposure size is integrated over all parameter values in order to measure the portfolio's concentration risk.
 
-While this method is able to measure the properties of specific portfolios, the expected properties of the model for a given portfolios aren't known yet.
-The main goal of this thesis this is to study the properties of the ramping parameter under the most common theoretical graph models: the random graph model and the configuration model.
-Studying the properties of the ramping parameter under these models has proved for other types of questions (consider for example of epidemiology models~\cite{keeling2005networkspublisher}) useful for several reasons.
+While this method is able to measure properties of specific portfolios, little is hitherto know about the expected properties of the model for a given portfolios.
+% The expected properties could prove helpful to help identify idiosyncrasies of the model's behaviour on the specific portfolio at hand.
+The main goal of this thesis is to connect ramping parameter model with theoretical work behind random graphs.
+For this, we study the properties of the ramping parameter under the most widely theoretical graph model: the random graph model described by~\cite{erdos1959random}.
 Firstly, having the model inspected theoretically allows for a better understanding of its properties.
 Secondly, even though the theoretical models do not capture all the properties of real world graphs, it provides useful baselines for comparison with the results with real portfolios.
 
@@ -87,10 +93,21 @@ Secondly, even though the theoretical models do not capture all the properties o
 \section{Credit concentration risk} % (fold)
 \label{sec:credit_concentration_risk}
 
-Credit concentration risk is the probability of losses arising from credit exposure to a given set of counterparties.
+Under Basel II~\cite{basel2007explanatory}, banks are required to compute the capital requirements for their credit portfolios using the ASFR (Asymptotic Single Risk Factor)~\cite{}, and are allowed to use their own internal risk measurements - IRB approach.
+The ASRF model is based on the results from~\cite{vasicek1991limiting} depends on three main quantities:
+\begin{itemize}
+	\item[PD] the Probability of Default: the probability that a considered obligor will default within the next 12 months,
+	\item[LGD] Loss Given Default: the expected fractional loss in case of the obligor's default,
+	\item[EAD] Exposure At Default: the expected exposure an obligor has when the default event occurs as seen from today.
+\end{itemize}
+While we urge the reader to refer to~\cite{Sindel:2009vd} for a more comprehensive description of the meaning of the quantities and how these are combined in the model, it is important to state that the ASRF model makes two important assumptions on the portfolios: 
+\begin{enumerate}
+	\item they are perfectly fine grained, thereby containing no idiosyncratic risk, i.e. no Concentration Risk
+	\item there is only one source of systematic risk.
+\end{enumerate}
+In order to circumvent this limitation, the concentration risk is accounted for by the so-called granularity adjustment (GA).
+Credit concentration risk is the probability of losses arising from an outstanding credit exposure to a given set of counterparties through some common risk factors.
 
-
-\todo{add info from other thesis}
 
 % section credit_concentration_risk (end)
 
