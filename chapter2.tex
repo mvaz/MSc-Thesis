@@ -334,6 +334,7 @@ and obtain a surprisingly simple form, which does not have a closed form solutio
 
 Using Eq.~\ref{eq:h_z} we can describe the average size of the component a randomly chosen vertex belongs to by
 \begin{equation}
+    \label{eq:avg_comp_size_naive}
 	\mean{s} = \frac{\sum_s s \pi_s}{\sum_s \pi_s} = \frac{h'(1)}{1-S}
 \end{equation}
 Since
@@ -342,10 +343,22 @@ Since
 	        + c z h'(z)\exp\left( c(h(z) - 1)  \right) \\
 	      & = \frac{h(z)}{z} + c h(z) h'(z),
 \end{align*}
-By further simplifying and making $z=1$
+By further simplifying and observing that, as stated before, $h(1) = \sum_s pi_s = 1 - S $, we arrive at 
 \begin{equation}
-	h'(1) = \frac{h(1)}{1- ch(1)}
+	h'(1) = \frac{h(1)}{1- ch(1)} = \frac{1-S}{1 - c + c S}
 \end{equation}
+\noindent and that considering Eq.~\ref{eq:avg_comp_size_naive}, we can write
+\begin{equation}
+	\mean{s} = \frac{1}{1-c+cS}
+\end{equation}
+This equation will diverge for $c=1$, since for this value of $c$, $S=0$.
+This is clearly visible in figure~\ref{fig:mean_size_small_components}.
+\begin{figure}[tb]
+	\centering
+	\includegraphics[scale=0.8]{figures/2_mean_size_small_components.png}
+	\caption{Mean size of small components as a function of the mean degree $c$.}
+	\label{fig:mean_size_small_components}
+\end{figure}
 
 
 % $H_1(x)$ follows the recursive condition
