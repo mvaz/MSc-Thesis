@@ -28,11 +28,11 @@
 of credit concentration risk}
 %note \\[1ex] is a line break in the title
 
-% \author{Miguel Vaz}        %your name
+\author{Candidate Number 187489}        %your name
 \college{Kellogg College}  %your college
 
 %\renewcommand{\submittedtext}{change the default text here if needed}
-\degree{Part-Time MSc in Mathematical Finance}     %the degree
+\degree{MSc in Mathematical Finance}     %the degree
 \degreedate{Trinity 2016}         %the degree date
 
 %end the preamble and start the document
@@ -51,10 +51,10 @@ of credit concentration risk}
 \include{dedication}        % include a dedication.tex file
 % \include{authenticity}      % include an acknowledgements.tex file
 \include{abstract}          % include the abstract
-\include{notation}          % include the abstract
 
 \begin{romanpages}          % start roman page numbering
 \tableofcontents            % generate and include a table of contents
+\include{notation}          % include the abstract
 \listoffigures              % generate and include a list of figures
 \end{romanpages}            % end roman page numbering
 
@@ -105,9 +105,16 @@ While we urge the reader to refer to~\cite{Sindel:2009vd} for a more comprehensi
 	\item they are perfectly fine grained, thereby containing no idiosyncratic risk, i.e. no Concentration Risk
 	\item there is only one source of systematic risk.
 \end{enumerate}
-In order to circumvent this limitation, the concentration risk is accounted for by the so-called granularity adjustment (GA).
-Credit concentration risk is the probability of losses arising from an outstanding credit exposure to a given set of counterparties through some common risk factors.
+In order to circumvent this limitation, the concentration risk, i.e. the probability of losses arising from an outstanding credit exposure to a given set of counterparties through some common risk factors, is accounted for by the so-called granularity adjustment (GA)~\cite{lutkebohmert2008concentration}.
 
+We outline the different strategies behind the existing methodologies for assessing the Concentration Risk
+\begin{itemize}
+	\item concentration of absolute exposure, e.g. by means of the HHI (Herfindahl-Hischmann Index)
+	\item a measurement of relative exposure concentrations, e.g. by using the Lorenz-Curve
+	\item comparison with a given benchmark portfolio
+\end{itemize}
+As can be seen, the first two measures here rely solely on the exposure structure of the portfolio.
+The measure proposed by~\cite{Sindel:2009vd} goes beyond this by relying on both the exposure- and the correlation-structure of the portfolio.
 
 % section credit_concentration_risk (end)
 
@@ -117,24 +124,41 @@ Credit concentration risk is the probability of losses arising from an outstandi
 The ramping parameter model was developed in~\cite{Sindel:2009vd} and aims at assessing the concentration risk in real world loan portfolios. 
 In contrast to other methods for studying concentration risk, the ramping parameter takes into account both, the exposure- and the dependency-structure of the portfolio.
 A particular strength of this methodology is that it can be used universally.
+% Through the course of this thesis, the 
 
-The ramping parameter monitors how the component structure of a graph (which represents the considered portfolio) develops as edges are removed increasingly according to their strength.
+The ramping parameter monitors how the component structure - notably the component with largest exposure - of a graph representing the considered portfolio develops, as edges are removed increasingly according to their strength.
 % It computes a curve that parameterizes the dependency of the effective exposure on the ramping parameter.
+We begin by defining some quantitites.
+
+\begin{definition}{Portfolio}
+A credit portfolio is a tuple $(O, \hat{\rho})$, where $O$ is a set of $n$ exposures from $n$ different obligors and $C$ an $n \times n$ matrix.
+The $\rmat$ matrix represents the interdependency (or correlation) between each obligor $i$, and each element $\rij \in [0,1]$.
+\end{definition}
+
+\begin{remark}
+Throughout this work, the matrix $\rmat$ is symmetric, so that $\forall i,j \rij = \rho_{ji}$ and the values of $\rho_{ij}$ are positive.
+Even though in the real world the dependency between obligors is not necessarily symmetric, e.g. in the case where obligor $i$ is asubsidiary of obligor $j$, the symmetry assumption renders the model more analytically tractable.
+\end{remark}
+
+
 
 
 
 The approach proposed by~\cite{Sindel:2009vd} for quantifying the concentration risk of a loan portfolio works can be summarized as follows:
 \begin{itemize}
-	\item The mutual dependency between the obligors in a portfolio is represented by a matrix $\rho_{ij}$. This matrix is symmetric, the values $\rho_{ij} \in [0,1]$, and it will be called correlation matrix throughout the remainder of this document.
-	\item A so-called ramping parameter $\ramp \in [0,1]$ is used to define the effective correlation matrix $\rho_{ij}(\ramp)$ given the value of this  parameter:
+	\item The mutual dependency between the obligors in a portfolio is represented by a matrix $C$.
+	This matrix will be referred to through the document as correlation or interdependency matrix.
+	This matrix is symmetric, its values lie $c_{ij} \in [0,1]$~\footnote{this thesis relaxes the interpretation and the domain of the values, but still follows the original definition}.
+
+	\item A so-called ramping parameter $\ramp \in [0,1]$ is used to define the effective correlation, or adjacency matrix $A(\ramp)$ given the value of this  parameter:
 	\begin{equation}
-	\rho_{ij}(\ramp) = 
+	a_{ij}(\ramp) = 
 		\begin{cases}
-		1 \text{ if } \rho_{ij} \ge \ramp,\\
+		1 \text{ if } c_{ij} \ge \ramp,\\
 		0 \text{ otherwise}.
 		\end{cases}
 	\end{equation}
-	At $\ramp = 0$, the effective matrix will contain all connections in the original matrix. At $\ramp = 1$, all obligors in the effective matrix will be disconnected.
+	At $\ramp = 0$, the effective matrix will contain all connections in the original matrix. At $\ramp = 1$, all obligors in the effective matrix $A$ will be disconnected.
 	
 	\item The exposure-dependence is taken into account by computing the “effective” exposure for every value of $\ramp$.
 \end{itemize}
@@ -159,17 +183,6 @@ For a particular value of the correlation strength obligor $D$ becomes independe
  
 % And the next is a somewhat informal definition
  
-\begin{definition}{Portfolio}
-A credit portfolio is a tuple $(O, \hat{\rho})$, where $O$ is a set of $n$ exposures from $n$ different obligors and $\hat{\rho}$ an $n \times n$ matrix.
-The $\rmat$ matrix represents the interdependency (or correlation) between each obligor $i$, and each element $\rij \in [0,1]$.
-\end{definition}
-
-\begin{remark}
-Throughout this work, the matrix $\rmat$ is symmetric, so that $\forall i,j \rij = \rho_{ji}$ and the values of $\rho_{ij}$ are positive.
-Even though in the real world the dependency between obligors is not necessarily symmetric, e.g. in the case where obligor $i$ is asubsidiary of obligor $j$, the symmetry assumption renders the model more analytically tractable.
-\end{remark}
-
-
 
 The algorithm is described in~\ref{algo:ramping_parameter}.
 
@@ -232,7 +245,7 @@ It emerges almost spontaneously as the edge density reaches a critical value, le
 This can also be seen in Figure~\vref{fig:giant_component}
 \begin{figure}[tb]
 	\centering
-	\includegraphics[width=14cm]{figures/giant_component.png}
+	\includegraphics[width=13.5cm]{figures/giant_component.png}
 	\caption[Sudden appearance of the giant component in a random graph]{This figure illustrates the sudden appearance of a giant connected component (lower plots) in the random graph model. The graphs, each with $n=200$ nodes are generated randomly, with a mean degree of $c$ and an edge probability $p$. The random graph model predicts a giant component when $c\ge1$}
 	\label{fig:giant_component}
 \end{figure}
