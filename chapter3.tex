@@ -227,11 +227,11 @@ In order to illustrate this, we show a histogram of the distribution of $n_s$ in
 \end{figure}
 
 
-\begin{theorem}{Size largest component}
+\begin{theorem}{Size of the largest component.}
 \label{thm:max_comp_size}
 Let $n_s$ be the distribution of the non-giant component sizes under the random graph model, $k$ be the number of components in the graph, $C_i$ the size of component $i$.
 Then $Y=max\left\{ C_1,\ldots,C_k\right\}$, the size of the largest non-giant component in the network, is a r.v. with probability distribution given by
-by $F_Y(y) = (\sum_{s=1}^{y} n_s)^k$.
+$F_Y(y) = (\sum_{s=1}^{y} n_s)^k$.
 \end{theorem}
 \begin{proof}
 Since every edge in the network exists independently, the $C_i$ variables are i.i.d. with p.d.f. given by equation~\ref{eq:n_s}.
@@ -245,8 +245,6 @@ Theorem~\vref{thm:max_comp_size} is only of limited help due to the fact that th
 Its distribution is, however, known and can be used to compute a numerical estimate of the distribution above.
 \end{remark}
 
-
-
 If we consider $c > 1$, then the size of the largest component is trivially given by $S$.
 In the case of $c \le 1$, then we must consider the distribution $Y$ given by Theorem~\ref{thm:max_comp_size}.
 We consider the expected number of components to be given by
@@ -254,30 +252,52 @@ We consider the expected number of components to be given by
 	k = \sum_{s=1}^{\infty} n_s
 \end{equation}
 which can be seen in Figure~\ref{fig:gnp_number_components}.
-\begin{figure}[hb]
-	\centering
-	\includegraphics[scale=0.8]{figures/gnp_number_components.png}
-	\caption{Number of components as a function of the probability $p$ of the $G(n,p)$ model.}
-	\label{fig:gnp_number_components}
-\end{figure}
+
 
 And finally, the expected maximal component size is simply given by the definition of the expected value.
 \begin{equation}
 	E[Y] = \sum_s s P(Y=s)
+	\label{eq:e_y}
 \end{equation}
 and can be seen in Figure~\ref{fig:gnp_largest_component} for all values of  the parameter $\rho$ in different truncated exponential probabilities.
 
-
-
 \begin{figure}[hb]
 	\centering
-	\includegraphics[scale=1.1]{figures/3_largest_component.png}
-	\caption{Largest component as a fraction of the graph.}
+	\includegraphics[scale=0.9]{figures/3_largest_component.png}
+	\caption[Expected relative size of the largest component.]{Expected relative size of the largest component. One can see the result of some numerical instability in the region near the phase transition. The reason behind this instability is still unknown.}
 	\label{fig:gnp_largest_component}
 \end{figure}
 
 
 
+\begin{theorem}{Expected ramping parameter value.}
+	Let $Y$ be the size of the largest small component in a random graph, and $S$ the relative size of the giant component.
+	Let $Pf$ be a uniformly exposed portfolio with correlation matrix $C$ whose elements are independently distributed according to the cdf $G$.
+	Then, the expected ramping parameter value for $Pf$ and $\ramp$ by
+	$$\max\left\{\frac{E[Y]}{n}, S\right\}$$
+	is given by $c$.
+\end{theorem}
+\begin{proof}
+	The largest component is either the the giant component (if it not exists, $S=0$) or the largest small component, with expected value given by Equation~\ref{eq:e_y}.
+	Because the exposures are uniformly distributed across obligors, $EAD_j = 1/n$, the value of
+	$$R(\ramp) = \max_{C_k} \left(  \frac{\sum_{j\in C_k} \textrm{EAD}_j}{\sum_i \textrm{EAD}_i}  \right)$ 
+	\noindent reduces trivially to 
+	$$R(\ramp) = \max_{C_k} \left(  \frac{\sum_{j\in C_k} 1/n}{\sum_i 1/n}  \right) = \max_{C_k} \frac{\sum_{j\in C_k} 1}{n}$$
+	and therefore
+	$$E[R(\ramp)] = \max\left\{\frac{E[Y]}{n}, S\right\}
+\end{proof}
+
+\noindent An example of the curve defined by this value can be seen in Figure~\ref{fig:gnp_largest_component} above.
+The usefulness of this result is discussed in the following Section.
+
+
+
+\begin{figure}[hb]
+	\centering
+	\includegraphics[scale=0.8]{figures/gnp_number_components.png}
+	\caption{Expected number of components as a function of the probability $p$ of the $G(n,p)$ model.}
+	\label{fig:gnp_number_components}
+\end{figure}
 % subsection component_sizes (end)
 
 
