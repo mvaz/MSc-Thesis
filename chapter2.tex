@@ -1,4 +1,4 @@
-\chapter{Graphs and networks} % (fold)
+\chapter{Random graphs and networks} % (fold)
 \label{cha:graphs_and_networks}
 
 
@@ -356,9 +356,33 @@ This is clearly visible in figure~\ref{fig:mean_size_small_components}.
 \begin{figure}[tb]
 	\centering
 	\includegraphics[scale=0.8]{figures/2_mean_size_small_components.png}
-	\caption{Mean size of small components as a function of the mean degree $c$.}
+	\caption{Mean size of small component to which a randomly chose vertex would belong to as a function of the mean degree $c$.}
 	\label{fig:mean_size_small_components}
 \end{figure}
+% Using a similar use of the derivative of $h(z)$, \cite{newman2010networks} shows how to derive an expression for the average component size $R$, which is then given by
+% \begin{equation}
+% 	R = \frac{2}{2-c + cS}
+% \end{equation}
+% Interestingly, although the $\mean{s}$ diverges for $c=1$, $R$ remains bounded.
+
+Of large interest to this thesis is $\pi_s$, the probability that a randomly chose node belongs to a component with size $s$.
+It turns out that, although they cannot be directly extracted by derivation of Eq.~\ref{eq:h_z}, because the solution is not known.
+We turn to~\cite{newman2010networks}, who shows that making use of the \textit{Lagrange inversion formula}, a series expansion of $h(z)$ can be derived and used to produce the identity
+\begin{equation}
+	\pi_s = \frac{e^{-sc}(sc)^{s-1}}{s!} 
+\end{equation}
+
+\section{Discussion} % (fold)
+\label{sec:discussion}
+
+In this chapter we have looked at several properties of the random graph model.
+The random graph model is a relatively simplistic model that nonetheless exhibits interesting properties, such as the existence of a giant component after a certain average connectivity.
+
+Other models of random graphs exist, such as the configuration model, which exhibit more realistic properties, but which are less prone to analytic inspection.
+In this thesis, we focus on the random graph model and its connection with the ramping parameter.
+This connection will be analysed in the next chapter.
+
+% section discussion (end)
 
 
 % $H_1(x)$ follows the recursive condition
