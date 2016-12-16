@@ -16,20 +16,18 @@
 \vspace{1cm}
 
 
-Banking regulators (Basel II) require market participants to identify and monitor concentration risk in their credit portfolios. Concentration risk is the risk arising from high exposure to single risk factors. Standard concentration measures rely mainly on the aggregation of the measures of each portfolio element and, for example sectorial allocation~\cite{lutkebohmert2008concentration}.
+Concentration risk is the risk arising from high exposure to single risk factors. Standard concentration measures rely mainly on the aggregation of the measures of each portfolio element at, for example the sectorial level~\cite{lutkebohmert2008concentration}.
 They underestimate, however, direct economic links between the elements of the portfolio and therefore the underlying structure of the portfolio.
 The importance of structural measures has been confirmed by recent financial events, where large losses arising from worldwide contagion effects were registered~\cite{Kazi:2013vr}.
 	
-Network models are especially apt at identifying structural properties~\cite{newman2010networks}, as they take not only model the elements of a system (the nodes or vertices) but also the relations between those elements (the edges). Network models are proving to be useful tools for providing early-warning signals of systemic risk~\cite{Squartini:2013ev}, measuring liquidity risk~\cite{Karas:2012tp}, identifying sectors from time-series correlations~\cite{Onnela:2004vz,Fenn:2009uf,Fenn:2011kp}, as well as insights into finding diversified baskets of assets in the classical investment framework~\cite{Pozzi:2013ci}.
+Network models are especially apt at identifying structural properties~\cite{newman2010networks}, as they take not only model the elements of a system (the nodes or vertices) but also the relations between those elements (the edges). Network models are proving to be useful tools for a large set of financial risk modelling.
 
-Previous work on concentration risk with network model~\cite{Sindel:2009vd} used a ramping parameter for eliminating correlations (connections) that have a smaller strength than the ramping parameter, and measured the exposure of the individual components of the resulting network. The evolution of the cluster with largest exposure with the ramping parameter provides an insight into how strongly interdependent the portfolio is and how measure its concentration risk.
-
+This thesis builds on previous work on concentration risk with a network model~\cite{Sindel:2009vd}, which used a variable parameter for progressively eliminating interdependencies between obligors, and analysed the exposure of the component with largest exposure to measure the portfolio's concentration risk.
 While this method is able to measure the properties of specific portfolios, the expected theoretical properties of the model have not been studied yet.
-The main goal of this thesis this is to study the properties of the ramping parameter under the most common theoretical graph model: the random graph model.
 
-Studying the properties of the ramping parameter under these models has proved for other types of questions (consider for example of epidemiology models~\cite{keeling2005networkspublisher}) useful for several reasons.
-Firstly, having the model inspected theoretically allows for a better understanding of its properties.
-Secondly, even though the theoretical models do not capture all the properties of real world graphs, it provides useful baselines for comparison with the results with real portfolios.
+This thesis studies the theoretically expected distribution of the largest component in the sparsified correlation matrix by making a link between the varying parameter and the distribution function of the interobligor correlations, and interpreting these on the light of the random graph model.
+For this, it makes the assumptions that (1) the exposure is homogeneously distributed among the obligors and that (2) the correlations between obligors are statistically independent.
+We find that the largest component is strongly dominated by the so-called giant component and therefore strongly dependent on the assumed distribution of the correlations.
 
 
 \end{abstract}
