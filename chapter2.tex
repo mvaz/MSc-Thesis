@@ -2,7 +2,6 @@
 \label{cha:graphs_and_networks}
 
 
-
 The networks studied in this document can be represented by a single graph.
 In general, the term \textit{graph} is used for the mathematical object defined below and the term \textit{network} for some model that relies on one (or more) graphs.
 
@@ -140,7 +139,7 @@ As with other models studied in this thesis, statements made about the model are
 \begin{figure}[tb]
 	\centering
 	\includegraphics[width=10cm]{figures/gnp_hairball.png}
-	\caption{Plot of a random graph with $n = 1000$ nodes, edge probability $p = 0.003$ and $c=3$. 
+	\caption[Plot of a random graph with a dominating giant component]{Plot of a random graph with $n = 1000$ nodes, edge probability $p = 0.003$ and $c=3$. 
 	Nodes belonging to the same connected component are coloured identically.
 	We can see a dominating large component in the graph through the light blue nodes in the centre.
 	The existence of this dominating component is described in section~\ref{sub:giant_component}.}
@@ -269,7 +268,7 @@ S = 1 + \frac{W(-c e^{-c})}{c}
 \begin{figure}[tb]
 	\centering
 	\includegraphics[]{figures/2_s_as_function_of_c.png}
-	\caption{The fraction of the graph occupied by the giant component, $S$, as a function of the average expected degree $c$, and computed according to equation~\ref{eq:s_giant_component_lambert}. The phase transition at $c=1$ is well visible. For $c < 1$, no giant component is present, for $c>1$ it quickly occupies a dominating fraction of the network.}
+	\caption[Fraction of the graph occupied by the giant component as a function of the expected average degree]{The fraction of the graph occupied by the giant component, $S$, as a function of the average expected degree $c$, and computed according to equation~\ref{eq:s_giant_component_lambert}. The phase transition at $c=1$ is well visible. For $c < 1$, no giant component is present, for $c>1$ it quickly occupies a dominating fraction of the network.}
 	\label{fig:s_as_function_of_c}
 \end{figure}
 
