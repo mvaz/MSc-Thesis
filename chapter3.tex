@@ -256,25 +256,25 @@ We consider the expected number of components to be given by
 \begin{equation}
 	k = \sum_{s=1}^{\infty} n_s
 \end{equation}
-and the expected maximal component
-\begin{equation}
-	E[Y] = \sum_s s P(Y=s)
-\end{equation}
-% Then,
-
-
-
-\begin{figure}[tb]
+which can be seen in Figure~\ref{fig:gnp_number_components}.
+\begin{figure}[hb]
 	\centering
 	\includegraphics[scale=0.8]{figures/gnp_number_components.png}
 	\caption{Number of components as a function of the probability $p$ of the $G(n,p)$ model.}
 	\label{fig:gnp_number_components}
 \end{figure}
 
+And finally, the expected maximal component size is simply given by the definition of the expected value.
+\begin{equation}
+	E[Y] = \sum_s s P(Y=s)
+\end{equation}
+and can be seen in Figure~\ref{fig:gnp_largest_component} for all values of  the parameter $\rho$ in different truncated exponential probabilities.
 
-\begin{figure}[tb]
+
+
+\begin{figure}[hb]
 	\centering
-	\includegraphics[scale=1.]{figures/3_largest_component.png}
+	\includegraphics[scale=1.1]{figures/3_largest_component.png}
 	\caption{Largest component as a fraction of the graph.}
 	\label{fig:gnp_largest_component}
 \end{figure}
