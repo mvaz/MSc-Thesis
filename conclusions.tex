@@ -1,59 +1,64 @@
 \chapter{Summary and discussion} % (fold)
 \label{cha:discussion}
 
-This thesis explores properties of the ramping parameter model~\cite{Sindel:2009} for the random graph model.
+This thesis explores properties the construction process of the ramping parameter model~\cite{Sindel:2009vd} using theoretical results from the random graph model.
 To the best of our knowledge, this has not been addressed in the literature.
-% In particular, the random graph model by~\cite{} and the configuration model were explored.
-% The study of the theoretical properties of the ramping parameter is, to the best of our knowledge, not in the literature.
 
 
+Usually, credit concentration risk measures take only one of the above aspects into consideration~\cite{lutkebohmert2008concentration}.
+By contrast, the ramping parameter model is a measure of concentration risk in credit portfolios that takes both (i) the exposure to the obligors and (ii) the  interdependencies between obligors, which renders it especially interesting.
 
-The random graph model is a simple model of network formation, which generates networks with different statistical properties than real-world networks, but from which analytic solutions can be derived.
+The ramping parameter model works by considering the correlation matrix of obligors as a graph.
+For each value of a ramping parameter $\ramp \in [0,1]$, edges are removed from that graph if their weight (associated correlation or interdependency value) does not exceed the value of the parameter.
+The community structure of the reduced graph is then taken into consideration.
+Namely, the relative exposure-weight of the connected component with largest exposure $CR(\ramp)$ is tracked for each value of the parameter.
+In the original work, the curve is weighted and integrated to provide a final concentration value.
+An interesting discussion on which weight curve should be used is also part of the original work.
+Unfortunately, the choice of weight curve lacks a theoretical backing from random graph theory, motivating this thesis.
+
+
+The random graph model is a simple model of network formation that generates networks with different statistical properties than real-world networks, but from which analytic solutions can be derived.
 For studying the ramping parameter model, this is an interesting model to explore, since it has very relaxed assumptions:
 \begin{itemize}
 \item every edge exists independently from each other
-\item the properties of the edges are unclear
+\item the probability of each edge is constant across the entire graph
 \end{itemize}
-
-% The configuration model generates networks that follow an input degree distribution.
-% This is an important property, since degree distributions of real-world networks have properties that are independent of the domain of the network.
-% For example....
+and, as already mentioned, largely analytically tractable.
 
 
+This thesis studies value of the ramping parameter model expected by the random graph model $G_{n,p}$, by making the following assumptions:
+\begin{enumerate}
+	\item the value of $EAD_i$ is equal for all obligors
+	\item the correlations between obligors are statistically independent
+\end{enumerate}
+As show in chapter~\ref{cha:ramping_parameter_under_the_random_graph_model}, under the random graph model, we show that it is possibly to calculate the expected size of the largest connected component, and, thanks to assumption (1), the expected value of the ramping parameter for each value $\ramp$.
+In particular, this result takes into account the overall distribution of the correlation values of the original correlation matrix.
 
-state the assumptions of the thesis
-
-state the results
 
 
-\section{Future work}
+\section{Outlook and future work}
 \label{sec:future_work}
 
-What is the most adequate model for studying obligor interdependency?
-Are the power law graphs the best?
-Is there a correlation between the weight and the degree of the weight matrix?
+Time is both the biggest friend and enemy of such a work.
+While it ensures the convergence to a possibly useful result, it leaves many questions unanswered. 
+
+For us, the main unanswered question is to which extent the theoretical curve computed in the end of section~\ref{sub:small_component_sizes} can be used for determining the weight curve (see Equation~\vref{eq:ramping_integral}).
+Our hypothesis is that it could serve as some sort of null model and therefore lead to a weight curve and measure of concentration risk that takes the insights from the random graph models into account.
+
+Another question arises as to whether other, more expressive models of random graphs, can be used.
+One such model is the configuration model, which can express the properties of graphs with more realistic degree distributions, such as the popular power law distribution.
+In the literature research leading to this thesis, we came across theoretical results that describe the
+effect of edge removal from graphs with power-law and power-law like degree distributions~\cite{dubois2012effect}.
+These could be used in order to derive a theoretical distribution of the ramping parameter curve under the assumptions that certain obligors are intrinsically more densely connected than others.
+This is definitely more in line with what is observed in real world portfolios.
 
 
-Configuration model
-effect of edge removal from power-law and power-law like degree distributions~\cite{dubois2012effect}
+Lastly, a further possible extension of this work deals would allow for asymmetric interdependencies between obligors, i.e. the graphs under study would be directed graphs.
+The treatment of directed graphs is, however, more challenging than the that of undirected graphs.
+In particular, the definition of node degree is not unequivocal~\cite{newman2010networks}, like in the case of undirected graphs.
 
-
-
-
-
-Directed graphs.
-There is a treatment of the directed graphs model with the generating functions.
-Theoretical properties of connectedness are, however, cannot easily be derived from them.
-
-
-
-Connection to the study of real portfolios.
-How to use the studied properties as null models for the ramping parameters of real networks?
-Is there a connection to other measures of the concentration risk?
-
-
-The ramping parameter its concern with the study of a measure for concentration risk.
-In a risk management Setting, it would also be important to be able identify the obligors that increase the risk portfolio, or even of providing information regarding new credits / obligors that can be added to the portfolio so that the concentration risk effectively diminishes.
+% The ramping parameter its concern with the study of a measure for concentration risk.
+% In a risk management Setting, it would also be important to be able identify the obligors that increase the risk portfolio, or even of providing information regarding new credits / obligors that can be added to the portfolio so that the concentration risk effectively diminishes.
 
 
 % section future_work (end)
