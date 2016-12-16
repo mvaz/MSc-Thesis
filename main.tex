@@ -159,15 +159,24 @@ The approach proposed by~\cite{Sindel:2009vd} for quantifying the concentration 
 	\end{equation}
 	At $\ramp = 0$, the effective matrix will contain all connections in the original matrix. At $\ramp = 1$, all obligors in the effective matrix $A$ will be disconnected.
 	
-	\item The exposure-dependence is taken into account by computing the largest “effective” exposure for every value of $\ramp$. Concretely this means the following steps:
+	\item The exposure-dependence is taken into account by computing the largest “effective” exposure for every value of $\ramp$.
+	In particular, the ratio $R(\ramp)$ of the maximum of all exposures of all identified connected components $C_k$ and the total exposure of the portfolio is computed. Concretely this means the following steps:
 	\begin{enumerate}[i)]
 		\item compute the set of $k$ connected components $C_1,\ldots,C_k$ of the graph $G$ defined by the adjacency matrix $A(\ramp)$~\footnote{A definition of these terms is provided in~\ref{cha:graphs_and_networks}}, which effectively is a partition of the set of obligors,
 		\item compute $R(\ramp) = \max_{C_k} \left(  \frac{\sum_{j\in C_k} \textrm{EAD}_j}{\sum_i \textrm{EAD}_i}  \right)$, where $C_k$ is a connected component
 	\end{enumerate}
+	$R(\ramp)$ describes the risk of a portfolio associated with the default of its biggest clump for a given $\ramp$
+ 
+	\item The concentration risk $CR$ is determined by considering the area under a curve weighted by $P(\ramp)$, so that 
+	\begin{equation}
+	 	CR = \int_0^1 R(\ramp)P(\ramp)d\ramp
+	 \end{equation}
 \end{itemize}
 
-To properly account for the Concentration Risk we compute the ratio $R(ρ∗)$ of the maximum of all exposures of all identified connected components $C_k$ and the total exposure of the portfolio
-of the portfolio and $j$ runs over all loans within the connected component $C_k$.
+The original work experiments with several possible values for the weighted curve.
+In the context of this thesis, the consideration of a weighted curve is postponed for future work.
+Indeed, we see the results from this work as a possible contribution to determining a weighted curve that accounts for the expected distribution of $R(\ramp)$.
+
 \begin{figure}[tb]
 	\centering
 	\includegraphics[scale=0.5]{figures/ramping_parameter_example.png}
@@ -183,49 +192,9 @@ For a particular value of the correlation strength obligor $D$ becomes independe
 \end{figure}
 
  
- 
-% And the next is a somewhat informal definition
- 
-
-% The algorithm is described in~\ref{algo:ramping_parameter}.
-
-% \begin{algorithm}
-% \label{algo:ramping}
-% \caption{Ramping parameter algorithm~\label{algo:ramping_parameter}}
-% \State $\ramp \gets 0$
-
-% \State $w$ \gets \textrm{order $O_{ij}$}
-
-% \State $C$ \gets \{\}
-
-% \State $\epsilon\gets \min\{w_{ij}\}$
-
-% % 1. We systematically increase the ramping parameter ρ∗ from 0 to 1 with a suffi- ciently small step size.
-% \For{$\ramp$ \in [0,1]}
-
-% 	M \gets \text{compute the obligor correlation matrix as shown in eq~\ref{}
-
-% 	G \gets ({O, {m_{ij}})
-
-% 	C \gets \text{all connected connected components of graph} G
-
-% 	R(\ramp) \gets \max_{C_k} \left(  \frac{\sum_{j\in C_k} \textrm{EAD}_j}{\sum_i \textrm{EAD}_i}  \right), where C_k\\
-
-% \EndFor
-% \end{algorithm}
-
-% 2. For each value of ρ∗ we compute the effective (inter) obligor-correlation matrix as shown in Eq. 3.2.
-% 3. We compute the number of connected components and the corresponding obli- gation in each component of the graph for every value of ρ∗.4
-% 4. To properly account for the Concentration Risk we compute the ratio R(ρ∗) of the maximum of all exposures of all identified connected components Ck and the total exposure of the portfolio
-% of the portfolio and j runs over all loans within the connected component Ck.
-
-% In Eq. (3.3) i runs over all loans of the portfolio, i EADi is the total obligation
-% Note that R(ρ∗) describes the risk of a portfolio associated with the default of its biggest clump for a given ρ∗. The risk related to a correlated default of the two biggest clumps - which has a very small probability - is not included in equation (3.3). Of course one could account for such scenarios in R(ρ∗) as well by adjusting formula (3.3). As correlated defaults are exponentially suppressed we do not incorporate them in
 
 
-
-
-\todo{add example}
+% \todo{add example}
 
 % section ramping_parameter (end)
 
